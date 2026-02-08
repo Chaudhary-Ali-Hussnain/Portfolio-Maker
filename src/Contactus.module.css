@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #d54034, #ffffff, #d54034);
+}
+
+.mainHeader {
+  position: relative;
+  text-align: center;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
+.headerTitle {
+  font-size: 2.25rem;
+  color: #ffffff;
+  margin: 1rem 0 0.5rem 0;
+  font-weight: bold;
+}
+
+.headerSubtitle {
+  font-size: 1.13rem;
+  color: #ffffff;
+  opacity: 0.8;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.headerImg {
+  width: 100%;
+  height: 24rem;
+  object-fit: fill;
+  display: block;
+  margin: 0;
+}
+
+.logo {
+  position: absolute;
+  top: 8.5rem;
+  left: 1.25rem;
+  width: 7rem;
+  height: 5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.63rem rgba(0,0,0,0.3);
+}
+
+.divider {
+  margin: 1.5rem 0;
+  border: 0;
+  height: 1px;
+  background: #d54034;
+}
+
+.formContainer {
+  max-width: 60rem;
+  margin: 3rem auto;
+  width: 90%;
+}
+
+.registrationForm {
+  width: 100%;
+}
+
+.formSection {
+  border: 1px solid #d54034;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: white;
+  box-shadow: 0 0.25rem 1.13rem rgba(0,0,0,0.2);
+}
+
+.formSection legend {
+  color: #7d1e14;
+  font-weight: bold;
+}
+
+.formLabel {
+  display: block;
+  margin-top: 0.75rem;
+  color: #7d1e14;
+  font-weight: bold;
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.5rem;
+  border: 1px solid #d54034;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+}
+
+.formBtn {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #d54034;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.formBtn:hover {
+  background: #7d1e14;
+}
+
+.contactSection {
+  max-width: 60rem;
+  margin: 3rem auto;
+  width: 90%;
+}
+
+.contactTitle {
+  font-size: 2.5rem;
+  color: #7d1e14;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.contactList {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.2);
+  list-style: none;
+  font-size: 1.3rem;
+}
+
+.mainFooter {
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 1rem;
+  color: white;
+  margin-top: 1.88rem;
+  background: linear-gradient(to top, #7d1e14, #d54034);
+}
