@@ -17,34 +17,36 @@ body {
 }
 
 .headerTitle {
-  font-size: 2.25rem;
+  font-size: clamp(1.3rem, 4vw, 2.25rem);
   color: #ffffff;
   margin: 1rem 0 0.5rem 0;
   font-weight: bold;
+  padding: 0 0.5rem;
 }
 
 .headerSubtitle {
-  font-size: 1.13rem;
+  font-size: clamp(0.8rem, 2.5vw, 1.13rem);
   color: #ffffff;
   opacity: 0.8;
   margin: 0;
   margin-bottom: 1rem;
+  padding: 0 0.5rem;
 }
 
 .headerImg {
   width: 100%;
-  height: 24rem;
-  object-fit: fill;
+  height: clamp(12rem, 30vw, 24rem);
+  object-fit: cover;
   display: block;
   margin: 0;
 }
 
 .logo {
   position: absolute;
-  top: 8.5rem;
-  left: 1.25rem;
-  width: 7rem;
-  height: 5rem;
+  top: clamp(4rem, 12vw, 8.5rem);
+  left: clamp(0.5rem, 2vw, 1.25rem);
+  width: clamp(3.5rem, 10vw, 7rem);
+  height: clamp(2.5rem, 7vw, 5rem);
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.63rem rgba(0,0,0,0.3);
 }
@@ -57,9 +59,9 @@ body {
 }
 
 .formContainer {
-  max-width: 60rem;
+  max-width: 50rem;
   margin: 3rem auto;
-  width: 90%;
+  width: 92%;
 }
 
 .registrationForm {
@@ -68,7 +70,7 @@ body {
 
 .formSection {
   border: 1px solid #d54034;
-  padding: 1rem;
+  padding: clamp(0.6rem, 2vw, 1rem);
   border-radius: 0.5rem;
   background: white;
   box-shadow: 0 0.25rem 1.13rem rgba(0,0,0,0.2);
@@ -77,6 +79,7 @@ body {
 .formSection legend {
   color: #7d1e14;
   font-weight: bold;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
 }
 
 .formLabel {
@@ -84,6 +87,7 @@ body {
   margin-top: 0.75rem;
   color: #7d1e14;
   font-weight: bold;
+  font-size: clamp(0.8rem, 2vw, 1rem);
 }
 
 .formInput,
@@ -93,7 +97,7 @@ body {
   padding: 0.5rem;
   border: 1px solid #d54034;
   border-radius: 0.4rem;
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 2vw, 1rem);
 }
 
 .formBtn {
@@ -105,6 +109,8 @@ body {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
 }
 
 .formBtn:hover {
@@ -112,13 +118,13 @@ body {
 }
 
 .contactSection {
-  max-width: 60rem;
-  margin: 3rem auto;
-  width: 90%;
+  max-width: 50rem;
+  margin: 2rem auto;
+  width: 92%;
 }
 
 .contactTitle {
-  font-size: 2.5rem;
+  font-size: clamp(1.3rem, 4vw, 2.5rem);
   color: #7d1e14;
   margin-bottom: 1.5rem;
   text-align: center;
@@ -126,17 +132,18 @@ body {
 
 .contactList {
   background: white;
-  padding: 2.5rem;
+  padding: clamp(1rem, 3vw, 2.5rem);
   border-radius: 1rem;
   box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.2);
   list-style: none;
-  font-size: 1.3rem;
+  font-size: clamp(0.85rem, 2vw, 1.3rem);
+  line-height: 2;
 }
 
 .mainFooter {
   text-align: center;
-  padding: 1.25rem;
-  font-size: 1rem;
+  padding: clamp(0.8rem, 2vw, 1.25rem);
+  font-size: clamp(0.8rem, 2vw, 1rem);
   color: white;
   margin-top: 1.88rem;
   background: linear-gradient(to top, #7d1e14, #d54034);

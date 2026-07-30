@@ -7,7 +7,6 @@ import html2canvas from "html2canvas";
 const Portfolio = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const data = location.state;
 
   if (!data) {
@@ -24,20 +23,15 @@ const Portfolio = () => {
   const downloadPDF = async () => {
     const button = document.getElementById("downloadBtn");
     button.style.display = "none";
-
     const element = document.getElementById("portfolioBox");
-
     const canvas = await html2canvas(element, { scale: 2 });
     const imgData = canvas.toDataURL("image/png");
-
     const pdf = new jsPDF("p", "pt", "a4");
     const imgProps = pdf.getImageProperties(imgData);
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
     pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("portfolio.pdf");
-
     button.style.display = "block";
   };
 
@@ -59,7 +53,6 @@ const Portfolio = () => {
               <div className={styles.noImg}>No Image</div>
             )}
           </div>
-
           <div className={styles.profileInfo}>
             <h2>{data.personal.name}</h2>
             <p>Email: {data.personal.email}</p>
@@ -71,26 +64,28 @@ const Portfolio = () => {
 
         <div className={styles.section}>
           <h3>Education</h3>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Level</th>
-                <th>Institute</th>
-                <th>Year</th>
-                <th>Marks</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.education.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.level}</td>
-                  <td>{item.institute}</td>
-                  <td>{item.year}</td>
-                  <td>{item.marks}</td>
+          <div className={styles.tableWrap}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Level</th>
+                  <th>Institute</th>
+                  <th>Year</th>
+                  <th>Marks</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {data.education.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.level}</td>
+                    <td>{item.institute}</td>
+                    <td>{item.year}</td>
+                    <td>{item.marks}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div className={styles.section}>
@@ -104,26 +99,27 @@ const Portfolio = () => {
 
         <div className={styles.section}>
           <h3>Experience</h3>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th>Role</th>
-                <th>Duration</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.experience.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.company}</td>
-                  <td>{item.role}</td>
-                  <td>{item.duration}</td>
+          <div className={styles.tableWrap}>
+            <table className={styles.table}>
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Role</th>
+                  <th>Duration</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {data.experience.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.company}</td>
+                    <td>{item.role}</td>
+                    <td>{item.duration}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-
       </div>
     </div>
   );

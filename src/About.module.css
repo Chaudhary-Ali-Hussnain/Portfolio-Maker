@@ -18,38 +18,39 @@ body {
 }
 
 .headerTitle {
-  font-size: 2.25rem;
+  font-size: clamp(1.3rem, 4vw, 2.25rem);
   color: #ffffff;
   margin: 1rem 0 0.5rem 0;
   font-weight: bold;
+  padding: 0 0.5rem;
 }
 
 .headerSubtitle {
-  font-size: 1.13rem;
+  font-size: clamp(0.8rem, 2.5vw, 1.13rem);
   color: #ffffff;
   opacity: 0.8;
   margin: 0;
   margin-bottom: 1rem;
+  padding: 0 0.5rem;
 }
 
 .headerImg {
   width: 100%;
-  height: 24rem;
-  object-fit: fill;
+  height: clamp(12rem, 30vw, 24rem);
+  object-fit: cover;
   display: block;
   margin: 0;
 }
 
 .logo {
   position: absolute;
-  top: 8.5rem;
-  left: 1.25rem;
-  width: 7rem;
-  height: 5rem;
+  top: clamp(4rem, 12vw, 8.5rem);
+  left: clamp(0.5rem, 2vw, 1.25rem);
+  width: clamp(3.5rem, 10vw, 7rem);
+  height: clamp(2.5rem, 7vw, 5rem);
   border-radius: 0.5rem;
   box-shadow: 0 0.25rem 0.63rem rgba(0,0,0,0.3);
 }
-
 
 .divider {
   margin: 1.5rem 0;
@@ -61,21 +62,26 @@ body {
 .aboutText {
   max-width: 55%;
   margin: 3rem auto;
-  font-size: 1.4rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.4rem);
   background: white;
-  padding: 2.5rem;
+  padding: clamp(1rem, 3vw, 2.5rem);
   border-radius: 1rem;
   box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.15);
   text-align: center;
+  width: 92%;
+  max-width: 50rem;
 }
 
 .teamTableContainer {
-  max-width: 90%;
-  margin: 4rem auto;
+  max-width: 95%;
+  margin: 2rem auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .teamTable {
   width: 100%;
+  min-width: 450px;
   border-collapse: collapse;
   background: white;
   border-radius: 1rem;
@@ -86,28 +92,54 @@ body {
 .teamTable th {
   background: #7d1e14;
   color: white;
-  padding: 1.5rem;
-  font-size: 1.5rem;
+  padding: clamp(0.6rem, 2vw, 1.5rem);
+  font-size: clamp(0.8rem, 2vw, 1.5rem);
 }
 
 .teamTable td {
-  padding: 1.5rem;
+  padding: clamp(0.6rem, 2vw, 1.5rem);
   border-bottom: 1px solid #ddd;
-  font-size: 1.2rem;
+  font-size: clamp(0.75rem, 2vw, 1.2rem);
   text-align: center;
 }
 
+.teamTable td img {
+  max-width: 60px;
+  height: auto;
+}
+
 .infoSection {
-  max-width: 85%;
-  margin: 3rem auto;
+  max-width: 95%;
+  margin: 2rem auto;
   background: white;
-  padding: 2.5rem;
+  padding: clamp(1rem, 3vw, 2.5rem);
   border-radius: 1rem;
+  width: 92%;
+}
+
+.infoSection h1 {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #7d1e14;
+  margin-bottom: 1rem;
+}
+
+.infoSection ul {
+  list-style: none;
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  line-height: 1.8;
 }
 
 .mainFooter {
   text-align: center;
-  padding: 2rem;
+  padding: clamp(0.8rem, 2vw, 2rem);
   color: white;
   background: linear-gradient(to top, #7d1e14, #d54034);
+  font-size: clamp(0.8rem, 2vw, 1rem);
+}
+
+@media (max-width: 768px) {
+  .aboutText {
+    max-width: 95%;
+    width: 92%;
+  }
 }

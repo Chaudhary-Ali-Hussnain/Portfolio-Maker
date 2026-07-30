@@ -8,10 +8,11 @@
   max-width: 60rem;
   margin: 3rem auto;
   background: white;
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
   border-radius: 1rem;
   box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.2);
   overflow: hidden;
+  width: 95%;
 }
 
 .portfolioHeader {
@@ -19,81 +20,92 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .portfolioTitle {
   color: #7d1e14;
-  font-size: 2.2rem;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
 }
 
 .downloadBtn {
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem;
   border: none;
   background: #d54034;
   color: white;
   font-weight: bold;
   cursor: pointer;
   border-radius: 0.5rem;
+  font-size: clamp(0.75rem, 2vw, 1rem);
 }
 
 .profileRow {
   display: flex;
   gap: 2rem;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
 .profileImg img {
-  width: 10rem;
-  height: 10rem;
+  width: clamp(6rem, 20vw, 10rem);
+  height: clamp(6rem, 20vw, 10rem);
   border-radius: 1rem;
   object-fit: cover;
   box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
 }
 
 .profileInfo h2 {
-  font-size: 2rem;
+  font-size: clamp(1.3rem, 3vw, 2rem);
   color: #7d1e14;
 }
 
 .profileInfo p {
-  font-size: 1.1rem;
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
   margin: 0.5rem 0;
+  word-break: break-word;
 }
 
 .section {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .section h3 {
   color: #7d1e14;
   margin-bottom: 1rem;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
 }
 
 .table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 350px;
 }
 
 .table th {
   background: #7d1e14;
   color: white;
-  padding: 1rem;
+  padding: clamp(0.5rem, 1.5vw, 1rem);
+  font-size: clamp(0.7rem, 1.8vw, 1rem);
 }
 
 .table td {
-  padding: 1rem;
+  padding: clamp(0.5rem, 1.5vw, 1rem);
   border-bottom: 1px solid #ddd;
+  font-size: clamp(0.7rem, 1.8vw, 1rem);
+  word-break: break-word;
 }
 
 .skillsList {
   list-style: disc inside;
-  font-size: 1.1rem;
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
   line-height: 1.8;
+  padding-left: 0.5rem;
 }
 
 .noData {
   text-align: center;
-  padding: 3rem;
+  padding: 3rem 1rem;
 }
 
 .backBtn {
@@ -103,10 +115,33 @@
   border: none;
   cursor: pointer;
   border-radius: 0.5rem;
+  margin-top: 1rem;
 }
+
+@media (max-width: 768px) {
+  .portfolioBox {
+    width: 98%;
+    margin: 1rem auto;
+  }
+  .profileRow {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .portfolioHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .tableWrap {
+    overflow-x: auto;
+  }
+  .table {
+    min-width: 300px;
+  }
+}
+
 @media print {
   .downloadBtn {
     display: none;
   }
 }
-
