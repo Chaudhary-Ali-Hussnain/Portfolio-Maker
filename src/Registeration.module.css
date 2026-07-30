@@ -6,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(to bottom, #d54034, #ffffff, #d54034);
+  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
   background-attachment: scroll;
   color: #333;
 }
@@ -69,7 +69,7 @@ body {
   margin-top: 1rem;
   padding: 0.75rem;
   border: none;
-  background: #7d1e14;
+  background: #6c3baa;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -106,7 +106,7 @@ body {
   margin: 1.5rem 0;
   border: 0;
   height: 1px;
-  background: #d54034;
+  background: #8b5cf6;
 }
 
 .registrationForm {
@@ -116,13 +116,13 @@ body {
 }
 
 .formSection {
-  border: 1px solid #d54034;
+  border: 1px solid #8b5cf6;
   padding: clamp(0.6rem, 2vw, 1rem);
   border-radius: 0.5rem;
 }
 
 .formSection legend {
-  color: #7d1e14;
+  color: #6c3baa;
   font-weight: bold;
   font-size: clamp(0.85rem, 2.5vw, 1rem);
 }
@@ -130,7 +130,7 @@ body {
 .formLabel {
   display: block;
   margin-top: 0.75rem;
-  color: #7d1e14;
+  color: #6c3baa;
   font-weight: bold;
   font-size: clamp(0.8rem, 2vw, 1rem);
 }
@@ -141,7 +141,7 @@ body {
   width: 100%;
   margin-top: 0.25rem;
   padding: 0.5rem;
-  border: 1px solid #d54034;
+  border: 1px solid #8b5cf6;
   border-radius: 0.4rem;
   font-size: clamp(0.85rem, 2vw, 1rem);
 }
@@ -151,7 +151,7 @@ body {
   padding: 0.75rem;
   border: none;
   border-radius: 0.5rem;
-  background: #d54034;
+  background: #8b5cf6;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -160,7 +160,7 @@ body {
 }
 
 .formBtn:hover {
-  background: #7d1e14;
+  background: #6c3baa;
 }
 
 .contactSection {
@@ -169,7 +169,7 @@ body {
 }
 
 .contactTitle {
-  color: #7d1e14;
+  color: #6c3baa;
   margin-bottom: 0.75rem;
   font-size: clamp(1.2rem, 3vw, 1.8rem);
 }
@@ -187,7 +187,7 @@ body {
   font-size: clamp(0.8rem, 2vw, 1rem);
   color: white;
   margin-top: 1.88rem;
-  background: linear-gradient(to top, #7d1e14, #d54034);
+  background: linear-gradient(to top, #302b63, #0f0c29);
   border-radius: 0.75rem;
 }
 

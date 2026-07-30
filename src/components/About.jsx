@@ -58,14 +58,7 @@ const About = () => {
         </table>
       </div>
 
-      <section className={styles.infoSection}>
-        <h1>Contact Details</h1>
-        <ul>
-          <li>Email: example@gmail.com</li>
-          <li>Phone: 0322-4550150</li>
-          <li>Location: University of Central Punjab</li>
-        </ul>
-      </section>
+      
 
       <footer className={styles.mainFooter}>
         © 2025 Military Society — All Rights Reserved

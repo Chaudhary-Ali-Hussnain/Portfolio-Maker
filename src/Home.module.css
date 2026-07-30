@@ -6,7 +6,7 @@
 }
 
 body {
-  background: linear-gradient(to bottom, #d54034, #ffffff, #d54034);
+  background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
   background-attachment: scroll;
   color: #333;
 }
@@ -64,7 +64,7 @@ body {
 
 .navLinks li a {
   text-decoration: none;
-  color: #7d1e14;
+  color: #6c3baa;
   font-size: 1rem;
   font-weight: bold;
   transition: 0.3s;
@@ -98,7 +98,7 @@ hr { margin: 0.2rem 0; }
 .videoLink h3,
 .audioSection h3 {
   font-size: clamp(1.2rem, 3vw, 1.63rem);
-  color: #7d1e14;
+  color: #6c3baa;
   margin-bottom: 0.94rem;
   text-align: center;
 }
@@ -141,7 +141,7 @@ hr { margin: 0.2rem 0; }
 .videoLink a {
   display: block;
   text-align: center;
-  color: #7d1e14;
+  color: #6c3baa;
   font-weight: bold;
   text-decoration: none;
   font-size: clamp(0.85rem, 2vw, 1rem);
@@ -164,7 +164,7 @@ footer {
   font-size: clamp(0.8rem, 2vw, 1rem);
   color: white;
   margin-top: 1.88rem;
-  background: linear-gradient(to top, #7d1e14, #d54034);
+  background: linear-gradient(to top, #302b63, #0f0c29);
 }
 
 /* Mobile */
