@@ -64,6 +64,7 @@
   font-size: clamp(0.85rem, 2vw, 1.1rem);
   margin: 0.5rem 0;
   word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .section {
@@ -174,6 +175,8 @@
   font-size: 0.8rem;
   color: #333;
   margin: 0.15rem 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .atsHr {
@@ -201,12 +204,16 @@
   color: #222;
   margin: 0.3rem 0;
   line-height: 1.5;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .atsSection p {
   font-size: 0.85rem;
   color: #222;
   line-height: 1.5;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .atsFooter {
@@ -219,8 +226,24 @@
 }
 
 @media (max-width: 768px) {
+  .atsPage {
+    padding: 0.5rem;
+  }
   .atsBox {
-    padding: 1rem;
+    padding: 0.8rem;
+    width: 100%;
+  }
+  .atsHeader h1 {
+    font-size: 1.2rem;
+  }
+  .atsHeader p {
+    font-size: 0.7rem;
+  }
+  .atsSection h2 {
+    font-size: 0.85rem;
+  }
+  .atsItem, .atsSection p {
+    font-size: 0.75rem;
   }
 }
 

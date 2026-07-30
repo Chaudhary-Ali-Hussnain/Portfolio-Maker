@@ -54,7 +54,7 @@ body {
 
 .main-nav .nav-links li a:hover,
 .main-nav .nav-links li a.active {
-  color: #ffcc00;
+  color: #c084fc;
   text-decoration: underline;
   font-weight: bold;
 }

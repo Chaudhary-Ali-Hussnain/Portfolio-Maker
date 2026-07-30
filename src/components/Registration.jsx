@@ -193,12 +193,14 @@ const Registration = () => {
             <button type="button" className={styles.addBtn} onClick={addSkill}>+ Add Another Skill</button>
           </fieldset>
 
+          {portfolioType === "standard" && (
           <fieldset className={styles.formSection}>
             <legend>Profile Picture (Optional)</legend>
             <label className={styles.formLabel}>Upload Picture:</label>
             <input type="file" accept=".jpg,.jpeg,.png" className={styles.formInput} onChange={handleFile} />
             {personal.picture && <p style={{ marginTop: "0.3rem", fontSize: "0.8rem", color: "#6c3baa" }}>&#10003; Picture uploaded</p>}
           </fieldset>
+          )}
 
           {portfolioType === "standard" && (
             <fieldset className={styles.formSection}>
