@@ -2,9 +2,7 @@
   width: 100%;
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
+  overflow-x: auto;
 }
 
 .portfolioBox {
@@ -147,8 +145,7 @@
   background: #f5f5f5;
   min-height: 100vh;
   padding: 2rem 1rem;
-  display: flex;
-  justify-content: center;
+  overflow-x: auto;
 }
 
 .atsBox {
