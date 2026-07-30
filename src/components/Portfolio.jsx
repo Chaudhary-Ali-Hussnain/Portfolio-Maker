@@ -50,15 +50,23 @@ const Portfolio = () => {
           </div>
           <div className={styles.atsHeader}>
             <h1>{personal.name || "Your Name"}</h1>
-            <p>{personal.email} | {personal.gender} | Age: {personal.age}</p>
-            <p><strong>Field:</strong> {personal.field}</p>
+            <p>{personal.email} | {personal.contact} | {personal.gender} | Age: {personal.age}</p>
+            {personal.field && <p><strong>Field:</strong> {personal.field}</p>}
           </div>
+          {personal.objective && (
+            <>
+              <div className={styles.atsSection}>
+                <h2>Objective</h2>
+                <p>{personal.objective}</p>
+              </div>
+            </>
+          )}
           <hr className={styles.atsHr} />
           <div className={styles.atsSection}>
             <h2>Education</h2>
             {education.map((edu, i) => (
               <div key={i} className={styles.atsItem}>
-                <strong>{edu.level}</strong> — {edu.institute} ({edu.year}) | Marks: {edu.marks}
+                <strong>{edu.level}</strong> — {edu.institute} ({edu.year}){edu.marks ? ` | Marks: ${edu.marks}` : ""}
               </div>
             ))}
           </div>
@@ -103,23 +111,27 @@ const Portfolio = () => {
         </div>
 
         <div className={styles.profileRow}>
-          <div className={styles.profileImg}>
-            {personal.picture ? (
+          {personal.picture && (
+            <div className={styles.profileImg}>
               <img src={personal.picture} alt="Profile" style={{ border: `3px solid ${s.primary}` }} />
-            ) : (
-              <div className={styles.noImg} style={{ background: s.lightBg, color: s.primary, border: `2px dashed ${s.primary}` }}>
-                No Image
-              </div>
-            )}
-          </div>
+            </div>
+          )}
           <div className={styles.profileInfo}>
             <h2 style={{ color: s.primary }}>{personal.name}</h2>
             <p>Email: {personal.email}</p>
+            {personal.contact && <p>Contact: {personal.contact}</p>}
             <p>Age: {personal.age}</p>
             <p>Gender: {personal.gender}</p>
-            <p>Field: {personal.field}</p>
+            {personal.field && <p>Field: {personal.field}</p>}
           </div>
         </div>
+
+        {personal.objective && (
+          <div className={styles.section}>
+            <h3 style={{ color: s.primary, borderBottom: `2px solid ${s.secondary}` }}>Objective</h3>
+            <p style={{ fontSize: "0.9rem", lineHeight: "1.6", color: "#333" }}>{personal.objective}</p>
+          </div>
+        )}
 
         <div className={styles.section}>
           <h3 style={{ color: s.primary, borderBottom: `2px solid ${s.secondary}` }}>Education</h3>
@@ -129,7 +141,7 @@ const Portfolio = () => {
                 <th style={{ background: s.primary }}>Level</th>
                 <th style={{ background: s.primary }}>Institute</th>
                 <th style={{ background: s.primary }}>Year</th>
-                <th style={{ background: s.primary }}>Marks</th>
+                <th style={{ background: s.primary }}>Marks/GPA</th>
               </tr></thead>
               <tbody>
                 {education.map((item, i) => (
@@ -137,7 +149,7 @@ const Portfolio = () => {
                     <td>{item.level}</td>
                     <td>{item.institute}</td>
                     <td>{item.year}</td>
-                    <td>{item.marks}</td>
+                    <td>{item.marks || "—"}</td>
                   </tr>
                 ))}
               </tbody>
@@ -149,7 +161,7 @@ const Portfolio = () => {
           <h3 style={{ color: s.primary, borderBottom: `2px solid ${s.secondary}` }}>Skills</h3>
           <ul className={styles.skillsList}>
             {skills.map((skill, i) => (
-              <li key={i} style={{ color: s.text }}>{skill}</li>
+              <li key={i}>{skill}</li>
             ))}
           </ul>
         </div>
