@@ -2,17 +2,18 @@
   width: 100%;
   background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .portfolioBox {
-  max-width: 60rem;
   margin: 3rem auto;
   background: white;
   padding: clamp(1rem, 3vw, 2rem);
   border-radius: 1rem;
   box-shadow: 0 0.5rem 2rem rgba(0,0,0,0.2);
   overflow: hidden;
-  width: 95%;
 }
 
 .portfolioHeader {
@@ -121,7 +122,6 @@
 
 @media (max-width: 768px) {
   .portfolioBox {
-    width: 98%;
     margin: 1rem auto;
   }
   .profileRow {
@@ -147,10 +147,11 @@
   background: #f5f5f5;
   min-height: 100vh;
   padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .atsBox {
-  max-width: 50rem;
   margin: 0 auto;
   background: white;
   padding: 2rem 2.5rem;
@@ -231,7 +232,6 @@
   }
   .atsBox {
     padding: 0.8rem;
-    width: 100%;
   }
   .atsHeader h1 {
     font-size: 1.2rem;
