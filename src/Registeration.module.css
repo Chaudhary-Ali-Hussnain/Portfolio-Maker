@@ -146,6 +146,13 @@ body {
   font-size: clamp(0.85rem, 2vw, 1rem);
 }
 
+.formHint {
+  font-size: 0.78rem;
+  color: #777;
+  margin-top: 0.35rem;
+  line-height: 1.4;
+}
+
 .formBtn {
   margin-top: 1rem;
   padding: 0.75rem;

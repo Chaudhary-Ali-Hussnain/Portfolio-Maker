@@ -20,8 +20,11 @@ const Registration = () => {
   });
   const [education, setEducation] = useState([{ level: "", institute: "", year: "", marks: "" }]);
   const [skills, setSkills] = useState([""]);
-  const [experience, setExperience] = useState([{ company: "", role: "", duration: "" }]);
+  const [experience, setExperience] = useState([{ company: "", role: "", duration: "", achievements: "" }]);
   const [hasExperience, setHasExperience] = useState("no");
+  const [additional, setAdditional] = useState({
+    certifications: "", languages: "", tools: "", licenses: "", strengths: "",
+  });
   const [error, setError] = useState("");
   const [portfolioType, setPortfolioType] = useState("standard");
   const [colors, setColors] = useState({
@@ -32,8 +35,9 @@ const Registration = () => {
     setPersonal({ name: "", age: "", email: "", contact: "", gender: "", field: "", picture: "", video: "", objective: "" });
     setEducation([{ level: "", institute: "", year: "", marks: "" }]);
     setSkills([""]);
-    setExperience([{ company: "", role: "", duration: "" }]);
+    setExperience([{ company: "", role: "", duration: "", achievements: "" }]);
     setHasExperience("no");
+    setAdditional({ certifications: "", languages: "", tools: "", licenses: "", strengths: "" });
     setError("");
     setPortfolioType("standard");
   };
@@ -67,6 +71,7 @@ const Registration = () => {
       state: {
         personal, education, skills,
         experience: hasExperience === "yes" ? experience : [],
+        additional,
         colors, portfolioType,
       }
     });
@@ -82,7 +87,7 @@ const Registration = () => {
 
   const addEducation = () => setEducation([...education, { level: "", institute: "", year: "", marks: "" }]);
   const addSkill = () => setSkills([...skills, ""]);
-  const addExperience = () => setExperience([...experience, { company: "", role: "", duration: "" }]);
+  const addExperience = () => setExperience([...experience, { company: "", role: "", duration: "", achievements: "" }]);
 
   const handleFieldChange = (e) => {
     setPersonal({ ...personal, field: e.target.value });
@@ -131,9 +136,12 @@ const Registration = () => {
           </fieldset>
 
           <fieldset className={styles.formSection}>
-            <legend>Career Objective / Summary</legend>
-            <label className={styles.formLabel}>Write a short objective or summary (optional):</label>
-            <textarea className={styles.formTextarea} rows="4" placeholder="e.g. Motivated software engineer with 3 years of experience seeking a challenging role..." value={personal.objective} onChange={(e) => setPersonal({ ...personal, objective: e.target.value })} />
+            <legend>Professional Objective</legend>
+            <label className={styles.formLabel}>Write a strong career objective (80–120 words recommended; leave blank to auto-generate):</label>
+            <textarea className={styles.formTextarea} rows="5" placeholder="e.g. Highly motivated software engineer with 3 years of experience delivering scalable web applications..." value={personal.objective} onChange={(e) => setPersonal({ ...personal, objective: e.target.value })} />
+            <p className={styles.formHint}>
+              {personal.objective.trim() ? `${personal.objective.trim().split(/\s+/).length} words` : "0 words"} — aim for a strong paragraph of about 80–120 words.
+            </p>
           </fieldset>
 
           <fieldset className={styles.formSection}>
@@ -157,10 +165,19 @@ const Registration = () => {
             {hasExperience === "yes" && (
               <>
                 {experience.map((exp, i) => (
-                  <div key={i} className={styles.multiRow} style={{ marginTop: "0.5rem" }}>
-                    <input type="text" placeholder="Company *" className={styles.formInput} value={exp.company} onChange={(e) => { const l = [...experience]; l[i].company = e.target.value; setExperience(l); }} />
-                    <input type="text" placeholder="Role *" className={styles.formInput} value={exp.role} onChange={(e) => { const l = [...experience]; l[i].role = e.target.value; setExperience(l); }} />
-                    <input type="text" placeholder="Duration *" className={styles.formInput} value={exp.duration} onChange={(e) => { const l = [...experience]; l[i].duration = e.target.value; setExperience(l); }} />
+                  <div key={i} style={{ marginTop: "0.5rem" }}>
+                    <div className={styles.multiRow}>
+                      <input type="text" placeholder="Company *" className={styles.formInput} value={exp.company} onChange={(e) => { const l = [...experience]; l[i].company = e.target.value; setExperience(l); }} />
+                      <input type="text" placeholder="Role *" className={styles.formInput} value={exp.role} onChange={(e) => { const l = [...experience]; l[i].role = e.target.value; setExperience(l); }} />
+                      <input type="text" placeholder="Duration *" className={styles.formInput} value={exp.duration} onChange={(e) => { const l = [...experience]; l[i].duration = e.target.value; setExperience(l); }} />
+                    </div>
+                    <textarea
+                      className={styles.formTextarea}
+                      rows="3"
+                      placeholder={"Key achievements & responsibilities (one per line, 4–6 lines) e.g.\nDeveloped a customer portal that reduced response time by 30%"}
+                      value={exp.achievements}
+                      onChange={(e) => { const l = [...experience]; l[i].achievements = e.target.value; setExperience(l); }}
+                    />
                   </div>
                 ))}
                 <button type="button" className={styles.addBtn} onClick={addExperience}>+ Add Another Experience</button>
@@ -192,6 +209,23 @@ const Registration = () => {
             ))}
             <button type="button" className={styles.addBtn} onClick={addSkill}>+ Add Another Skill</button>
           </fieldset>
+
+          {portfolioType === "ats" && (
+            <fieldset className={styles.formSection}>
+              <legend>Additional Information</legend>
+              <p className={styles.formHint}>Separate multiple entries with commas. These appear as bullet points on your ATS resume.</p>
+              <label className={styles.formLabel}>Certifications</label>
+              <input type="text" className={styles.formInput} placeholder="e.g. AWS Certified Solutions Architect, PMP" value={additional.certifications} onChange={(e) => setAdditional({ ...additional, certifications: e.target.value })} />
+              <label className={styles.formLabel}>Languages</label>
+              <input type="text" className={styles.formInput} placeholder="e.g. English, Urdu, Arabic" value={additional.languages} onChange={(e) => setAdditional({ ...additional, languages: e.target.value })} />
+              <label className={styles.formLabel}>Technical Tools</label>
+              <input type="text" className={styles.formInput} placeholder="e.g. React, Node.js, Docker, Git" value={additional.tools} onChange={(e) => setAdditional({ ...additional, tools: e.target.value })} />
+              <label className={styles.formLabel}>Licenses</label>
+              <input type="text" className={styles.formInput} placeholder="e.g. Driver's License, Certified Ethical Hacker" value={additional.licenses} onChange={(e) => setAdditional({ ...additional, licenses: e.target.value })} />
+              <label className={styles.formLabel}>Strengths</label>
+              <input type="text" className={styles.formInput} placeholder="e.g. Leadership, Adaptability, Communication" value={additional.strengths} onChange={(e) => setAdditional({ ...additional, strengths: e.target.value })} />
+            </fieldset>
+          )}
 
           {portfolioType === "standard" && (
           <fieldset className={styles.formSection}>

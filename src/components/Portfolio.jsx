@@ -20,7 +20,7 @@ const Portfolio = () => {
     );
   }
 
-  const { personal, education, skills, experience, colors, portfolioType } = data;
+  const { personal, education, skills, experience, additional, colors, portfolioType } = data;
   const c = colors || { primary: "#6c3baa", secondary: "#8b5cf6", background: "#0f0c29", textColor: "#ffffff" };
 
   const downloadPDF = async () => {
@@ -38,55 +38,117 @@ const Portfolio = () => {
     if (btn) btn.style.display = "block";
   };
 
-  // ── ATS Resume Template ──
+  // Split a comma / semicolon / newline-separated string into a clean list.
+  const toList = (value) => {
+    if (!value) return [];
+    if (Array.isArray(value)) return value.map((s) => String(s).trim()).filter(Boolean);
+    return String(value).split(/\n|,|;/).map((s) => s.trim()).filter(Boolean);
+  };
+
+  // Fallback: build a strong professional objective when the user leaves it blank.
+  const buildObjective = (p, skillList, expList) => {
+    const role = (p.field || "professional").trim();
+    const exp = expList[0];
+    const expText =
+      exp && exp.duration
+        ? ` with ${exp.duration} of hands-on experience as a ${exp.role || "professional"} at ${exp.company || "a leading organization"}`
+        : "";
+    const skillText = skillList.length ? ` and a strong command of ${skillList.slice(0, 4).join(", ")}` : "";
+    return (
+      `Highly motivated and detail-oriented ${role}${expText} seeking a challenging position where I can apply my expertise and add measurable value to the organization. ` +
+      `Known for strong problem-solving abilities, clear communication, and a commitment to continuous learning${skillText}. ` +
+      `Aim to collaborate with cross-functional teams, deliver high-quality results, and grow into a trusted ${role} within a dynamic, results-driven environment.`
+    );
+  };
+
+  // ── Professional ATS Resume Template ──
   if (portfolioType === "ats") {
+    const objective = (personal.objective || "").trim() || buildObjective(personal, skills, experience);
+
+    const additionalSections = [
+      { title: "Certifications", items: toList(additional?.certifications) },
+      { title: "Languages", items: toList(additional?.languages) },
+      { title: "Technical Tools", items: toList(additional?.tools) },
+      { title: "Licenses", items: toList(additional?.licenses) },
+      { title: "Strengths", items: toList(additional?.strengths) },
+    ].filter((sec) => sec.items.length > 0);
+
+    const renderSection = (title, children) => (
+      <section className={styles.atsSection}>
+        <h2>{title}</h2>
+        {children}
+      </section>
+    );
+
     return (
       <div className={styles.atsPage}>
-        <div style={{ width: "794px", margin: "0 auto" }}>
-        <div className={styles.atsBox} id="portfolioBox">
-          <div style={{ textAlign: "right", marginBottom: 10 }}>
-            <button id="downloadBtn" className={styles.downloadBtn} onClick={downloadPDF}>
-              Download PDF
-            </button>
-          </div>
-          <div className={styles.atsHeader}>
-            <h1>{personal.name || "Your Name"}</h1>
-            <p>{personal.email} | {personal.contact} | {personal.gender} | Age: {personal.age}</p>
-            {personal.field && <p><strong>Field:</strong> {personal.field}</p>}
-          </div>
-          {personal.objective && (
-            <>
-              <div className={styles.atsSection}>
-                <h2>Objective</h2>
-                <p>{personal.objective}</p>
-              </div>
-            </>
-          )}
-          <hr className={styles.atsHr} />
-          <div className={styles.atsSection}>
-            <h2>Education</h2>
-            {education.map((edu, i) => (
-              <div key={i} className={styles.atsItem}>
-                <strong>{edu.level}</strong> — {edu.institute} ({edu.year}){edu.marks ? ` | Marks: ${edu.marks}` : ""}
-              </div>
+        <div className={styles.atsSheet}>
+          <button className={styles.downloadBtn} onClick={downloadPDF}>
+            Download PDF
+          </button>
+          <div className={styles.atsBox} id="portfolioBox">
+            <header className={styles.atsHeader}>
+              <h1>{personal.name || "Your Name"}</h1>
+              <p className={styles.atsContact}>
+                {[personal.contact, personal.email, personal.gender, personal.age ? `Age: ${personal.age}` : "", personal.field]
+                  .filter(Boolean)
+                  .join("   |   ")}
+              </p>
+            </header>
+
+            {renderSection("Professional Objective", <p className={styles.atsObjective}>{objective}</p>)}
+
+            {renderSection("Core Skills", (
+              <ul className={styles.atsSkills}>
+                {skills.map((skill, i) => <li key={i}>{skill}</li>)}
+              </ul>
+            ))}
+
+            {renderSection("Professional Experience", (
+              experience.length === 0 ? (
+                <p className={styles.atsMuted}>No professional experience provided.</p>
+              ) : (
+                experience.map((exp, i) => {
+                  const bullets = toList(exp.achievements);
+                  return (
+                    <div key={i} className={styles.atsExp}>
+                      <div className={styles.atsExpHeader}>
+                        <span className={styles.atsExpCompany}>{exp.company}</span>
+                        <span className={styles.atsExpRole}>{exp.role}</span>
+                        <span className={styles.atsExpDur}>{exp.duration}</span>
+                      </div>
+                      {bullets.length > 0 && (
+                        <ul className={styles.atsExpList}>
+                          {bullets.map((b, j) => <li key={j}>{b}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  );
+                })
+              )
+            ))}
+
+            {renderSection("Education", (
+              education.map((edu, i) => (
+                <div key={i} className={styles.atsEdu}>
+                  <span className={styles.atsEduDegree}>{edu.level}</span>
+                  <span className={styles.atsEduInst}>{edu.institute}</span>
+                  <span className={styles.atsEduYear}>{edu.year}</span>
+                  {edu.marks && <span className={styles.atsEduMarks}>{edu.marks}</span>}
+                </div>
+              ))
+            ))}
+
+            {additionalSections.length > 0 && renderSection("Additional Information", (
+              <ul className={styles.atsAddList}>
+                {additionalSections.map((sec, i) => (
+                  <li key={i}>
+                    <span className={styles.atsAddTitle}>{sec.title}:</span> {sec.items.join(", ")}
+                  </li>
+                ))}
+              </ul>
             ))}
           </div>
-          <div className={styles.atsSection}>
-            <h2>Skills</h2>
-            <p>{skills.join(", ")}</p>
-          </div>
-          {experience.length > 0 && (
-            <div className={styles.atsSection}>
-              <h2>Experience</h2>
-              {experience.map((exp, i) => (
-                <div key={i} className={styles.atsItem}>
-                  <strong>{exp.role}</strong> at {exp.company} ({exp.duration})
-                </div>
-              ))}
-            </div>
-          )}
-          <div className={styles.atsFooter}>ATS-Friendly Resume — Generated by Portfolio Maker</div>
-        </div>
         </div>
       </div>
     );

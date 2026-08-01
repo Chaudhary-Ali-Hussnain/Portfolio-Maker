@@ -126,86 +126,212 @@
   margin-top: 1rem;
 }
 
-/* ── ATS Resume Template ── */
+/* ── Professional ATS Resume Template ── */
 .atsPage {
   width: 100%;
   min-height: 100vh;
-  background: #f5f5f5;
+  background: #dfe3ea;
   padding: 2rem 1rem;
   overflow-x: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.atsSheet {
+  width: 794px;
+  margin: 0 auto;
 }
 
 .atsBox {
   width: 100%;
-  background: white;
-  padding: 2rem 2.5rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  font-family: "Times New Roman", Times, serif;
+  min-height: 1123px; /* fills a full A4 page */
+  background: #ffffff;
+  padding: 2.1rem 2.4rem;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  font-family: "Calibri", "Segoe UI", Arial, Helvetica, sans-serif;
+  color: #20242e;
 }
 
 .atsHeader {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.4rem;
 }
 
 .atsHeader h1 {
-  font-size: 1.6rem;
-  color: #000;
-  margin-bottom: 0.3rem;
-  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: 800;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #14171d;
+  margin: 0 0 0.4rem;
 }
 
-.atsHeader p {
-  font-size: 0.8rem;
+.atsContact {
+  font-size: 0.82rem;
   color: #333;
-  margin: 0.15rem 0;
-}
-
-.atsHr {
-  border: 0;
-  border-top: 2px solid #000;
-  margin: 0.8rem 0;
+  letter-spacing: 0.02em;
+  margin: 0;
 }
 
 .atsSection {
-  margin: 1rem 0;
+  margin-top: 0.25rem;
 }
 
 .atsSection h2 {
-  font-size: 1rem;
-  color: #000;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  border-bottom: 1px solid #666;
-  padding-bottom: 0.2rem;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.05em;
+  color: #14171d;
+  border-bottom: 2px solid #14171d;
+  padding-bottom: 0.28rem;
+  margin: 1.05rem 0 0.6rem;
 }
 
-.atsItem {
+.atsObjective {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  text-align: justify;
+  color: #23262f;
+  margin: 0;
+}
+
+.atsMuted {
+  font-size: 0.84rem;
+  color: #777;
+  font-style: italic;
+  margin: 0.2rem 0;
+}
+
+/* Core Skills — two balanced columns of bullets (never a paragraph) */
+.atsSkills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2;
+  column-gap: 2.6rem;
+}
+
+.atsSkills li {
+  position: relative;
+  padding-left: 1.1rem;
+  margin: 0 0 0.34rem 0;
   font-size: 0.85rem;
-  color: #222;
-  margin: 0.3rem 0;
-  line-height: 1.5;
+  line-height: 1.45;
+  break-inside: avoid;
 }
 
-.atsSection p {
+.atsSkills li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #14171d;
+}
+
+/* Professional Experience — bold company, role + duration, action-verb bullets */
+.atsExp {
+  margin-bottom: 0.9rem;
+}
+
+.atsExpHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.atsExpCompany {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #14171d;
+}
+
+.atsExpRole {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #2a2f3a;
+  font-style: italic;
+}
+
+.atsExpDur {
+  margin-left: auto;
+  font-size: 0.82rem;
+  color: #444;
+  white-space: nowrap;
+}
+
+.atsExpList {
+  margin: 0.35rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.atsExpList li {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  margin-bottom: 0.22rem;
+}
+
+/* Education — degree, institution, year, academic info */
+.atsEdu {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  font-size: 0.86rem;
+  margin-bottom: 0.4rem;
+}
+
+.atsEduDegree {
+  font-weight: 700;
+  color: #14171d;
+}
+
+.atsEduInst {
+  font-weight: 600;
+  font-style: italic;
+  color: #2a2f3a;
+}
+
+.atsEduYear {
+  margin-left: auto;
+  color: #444;
+}
+
+.atsEduMarks {
+  color: #555;
+}
+
+/* Additional Information — bullet points */
+.atsAddList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.atsAddList li {
+  position: relative;
+  padding-left: 1.1rem;
   font-size: 0.85rem;
-  color: #222;
   line-height: 1.5;
+  margin-bottom: 0.24rem;
 }
 
-.atsFooter {
-  text-align: center;
-  font-size: 0.65rem;
-  color: #888;
-  margin-top: 2rem;
-  border-top: 1px solid #ccc;
-  padding-top: 0.8rem;
+.atsAddList li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: #14171d;
+}
+
+.atsAddTitle {
+  font-weight: 700;
 }
 
 /* ── Print ── */
 @media print {
   .downloadBtn { display: none; }
-  .atsPage { padding: 0; background: white; }
+  .atsPage { padding: 0; background: #fff; }
+  .atsBox { box-shadow: none; }
 }
