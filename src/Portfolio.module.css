@@ -130,96 +130,112 @@
 .atsPage {
   width: 100%;
   min-height: 100vh;
-  background: #dfe3ea;
+  background: #e7eaf0;
   padding: 2rem 1rem;
-  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+.atsToolbar {
   display: flex;
   justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
-.atsSheet {
-  width: 794px;
-  margin: 0 auto;
-}
-
+/* The sheet is a flex column pinned to a full A4 height. Extra space is
+   distributed between sections (space-between) so short resumes still fill
+   the page, while long resumes simply grow and flow naturally. */
 .atsBox {
   width: 100%;
-  min-height: 1123px; /* fills a full A4 page */
+  min-height: 1123px;
   background: #ffffff;
-  padding: 2.1rem 2.4rem;
+  padding: 2.2rem 2.5rem;
   box-sizing: border-box;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
   font-family: "Calibri", "Segoe UI", Arial, Helvetica, sans-serif;
-  color: #20242e;
+  color: #1c2129;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
+/* ── Header ── */
 .atsHeader {
   text-align: center;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.6rem;
 }
 
 .atsHeader h1 {
-  font-size: 2rem;
+  font-size: 1.95rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #14171d;
-  margin: 0 0 0.4rem;
+  color: #10141a;
+  margin: 0 0 0.45rem;
 }
 
 .atsContact {
-  font-size: 0.82rem;
-  color: #333;
-  letter-spacing: 0.02em;
+  font-size: 0.84rem;
+  color: #3a404c;
+  letter-spacing: 0.015em;
   margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
+/* ── Sections ── */
 .atsSection {
-  margin-top: 0.25rem;
+  margin: 0.9rem 0 0;
 }
 
 .atsSection h2 {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: #14171d;
-  border-bottom: 2px solid #14171d;
-  padding-bottom: 0.28rem;
-  margin: 1.05rem 0 0.6rem;
+  color: #10141a;
+  border-bottom: 2px solid #10141a;
+  padding-bottom: 0.3rem;
+  margin: 0 0 0.7rem;
 }
 
+/* ── Professional Objective (wrapped paragraph) ── */
 .atsObjective {
-  font-size: 0.86rem;
-  line-height: 1.55;
+  font-size: 0.87rem;
+  line-height: 1.6;
   text-align: justify;
-  color: #23262f;
+  text-justify: inter-word;
+  color: #232830;
   margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .atsMuted {
   font-size: 0.84rem;
-  color: #777;
+  color: #7a7f8a;
   font-style: italic;
   margin: 0.2rem 0;
 }
 
-/* Core Skills — two balanced columns of bullets (never a paragraph) */
+/* ── Core Skills — two balanced, aligned columns ── */
 .atsSkills {
   list-style: none;
   margin: 0;
   padding: 0;
   columns: 2;
-  column-gap: 2.6rem;
+  column-gap: 2.75rem;
+  column-fill: balance;
 }
 
 .atsSkills li {
   position: relative;
-  padding-left: 1.1rem;
-  margin: 0 0 0.34rem 0;
-  font-size: 0.85rem;
+  padding-left: 1.15rem;
+  margin: 0 0 0.42rem 0;
+  font-size: 0.86rem;
   line-height: 1.45;
   break-inside: avoid;
+  overflow-wrap: break-word;
 }
 
 .atsSkills li::before {
@@ -227,83 +243,98 @@
   position: absolute;
   left: 0;
   top: 0;
-  color: #14171d;
+  color: #10141a;
 }
 
-/* Professional Experience — bold company, role + duration, action-verb bullets */
+/* ── Professional Experience — company (bold) + duration, role, bullets ── */
 .atsExp {
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.95rem;
+}
+
+.atsExp:last-child {
+  margin-bottom: 0;
 }
 
 .atsExpHeader {
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
-  gap: 0.55rem;
-  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .atsExpCompany {
   font-weight: 700;
-  font-size: 0.92rem;
-  color: #14171d;
-}
-
-.atsExpRole {
-  font-weight: 600;
-  font-size: 0.88rem;
-  color: #2a2f3a;
-  font-style: italic;
+  font-size: 0.95rem;
+  color: #10141a;
 }
 
 .atsExpDur {
-  margin-left: auto;
-  font-size: 0.82rem;
-  color: #444;
+  font-size: 0.83rem;
+  color: #4a5060;
   white-space: nowrap;
 }
 
+.atsExpRole {
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-style: italic;
+  color: #2c313b;
+  margin: 0.15rem 0 0.3rem;
+}
+
 .atsExpList {
-  margin: 0.35rem 0 0;
-  padding-left: 1.2rem;
+  margin: 0;
+  padding-left: 1.25rem;
 }
 
 .atsExpList li {
-  font-size: 0.84rem;
-  line-height: 1.45;
-  margin-bottom: 0.22rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 0.24rem;
+  overflow-wrap: break-word;
 }
 
-/* Education — degree, institution, year, academic info */
+.atsExpList li:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Education — degree + year on one row, institution/marks below ── */
 .atsEdu {
+  margin-bottom: 0.7rem;
+}
+
+.atsEdu:last-child {
+  margin-bottom: 0;
+}
+
+.atsEduRow {
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
-  gap: 0.55rem;
-  flex-wrap: wrap;
-  font-size: 0.86rem;
-  margin-bottom: 0.4rem;
+  gap: 1rem;
 }
 
 .atsEduDegree {
   font-weight: 700;
-  color: #14171d;
-}
-
-.atsEduInst {
-  font-weight: 600;
-  font-style: italic;
-  color: #2a2f3a;
+  font-size: 0.88rem;
+  color: #10141a;
 }
 
 .atsEduYear {
-  margin-left: auto;
-  color: #444;
+  font-size: 0.83rem;
+  color: #4a5060;
+  white-space: nowrap;
 }
 
-.atsEduMarks {
-  color: #555;
+.atsEduSub {
+  font-size: 0.85rem;
+  color: #2c313b;
+  margin-top: 0.12rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-/* Additional Information — bullet points */
+/* ── Additional Information — consistent bullets ── */
 .atsAddList {
   list-style: none;
   margin: 0;
@@ -312,17 +343,22 @@
 
 .atsAddList li {
   position: relative;
-  padding-left: 1.1rem;
+  padding-left: 1.15rem;
   font-size: 0.85rem;
-  line-height: 1.5;
-  margin-bottom: 0.24rem;
+  line-height: 1.55;
+  margin-bottom: 0.32rem;
+  overflow-wrap: break-word;
+}
+
+.atsAddList li:last-child {
+  margin-bottom: 0;
 }
 
 .atsAddList li::before {
   content: "\2022";
   position: absolute;
   left: 0;
-  color: #14171d;
+  color: #10141a;
 }
 
 .atsAddTitle {
@@ -332,6 +368,10 @@
 /* ── Print ── */
 @media print {
   .downloadBtn { display: none; }
+  .atsToolbar { display: none; }
   .atsPage { padding: 0; background: #fff; }
   .atsBox { box-shadow: none; }
+  /* Print the sheet at its natural A4 size, ignoring any FitA4 scale. */
+  [data-fit-inner] { transform: none !important; }
+  [data-fit-outer] { height: auto !important; }
 }

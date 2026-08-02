@@ -118,14 +118,14 @@ const Registration = () => {
 
           <fieldset className={styles.formSection}>
             <legend>Personal Information</legend>
-            <label className={styles.formLabel}>Full Name *</label>
-            <input type="text" className={styles.formInput} placeholder="e.g. John Doe" value={personal.name} onChange={(e) => setPersonal({ ...personal, name: e.target.value })} />
-            <label className={styles.formLabel}>Age *</label>
-            <input type="number" className={styles.formInput} placeholder="e.g. 25" value={personal.age} onChange={(e) => setPersonal({ ...personal, age: e.target.value })} />
-            <label className={styles.formLabel}>Email *</label>
-            <input type="email" className={styles.formInput} placeholder="e.g. john@example.com" value={personal.email} onChange={(e) => setPersonal({ ...personal, email: e.target.value })} />
-            <label className={styles.formLabel}>Contact Number *</label>
-            <input type="text" className={styles.formInput} placeholder="e.g. 0300-1234567" value={personal.contact} onChange={(e) => setPersonal({ ...personal, contact: e.target.value })} />
+            <label className={styles.formLabel} htmlFor="pName">Full Name *</label>
+            <input type="text" id="pName" className={styles.formInput} placeholder="e.g. John Doe" value={personal.name} onChange={(e) => setPersonal({ ...personal, name: e.target.value })} />
+            <label className={styles.formLabel} htmlFor="pAge">Age *</label>
+            <input type="number" id="pAge" className={styles.formInput} placeholder="e.g. 25" value={personal.age} onChange={(e) => setPersonal({ ...personal, age: e.target.value })} />
+            <label className={styles.formLabel} htmlFor="pEmail">Email *</label>
+            <input type="email" id="pEmail" className={styles.formInput} placeholder="e.g. john@example.com" value={personal.email} onChange={(e) => setPersonal({ ...personal, email: e.target.value })} />
+            <label className={styles.formLabel} htmlFor="pContact">Contact Number *</label>
+            <input type="text" id="pContact" className={styles.formInput} placeholder="e.g. 0300-1234567" value={personal.contact} onChange={(e) => setPersonal({ ...personal, contact: e.target.value })} />
             <label className={styles.formLabel}>Gender *</label>
             <div className={styles.radioGroup}>
               <input type="radio" id="male" name="gender" value="male" checked={personal.gender === "male"} onChange={(e) => setPersonal({ ...personal, gender: e.target.value })} />
@@ -137,8 +137,8 @@ const Registration = () => {
 
           <fieldset className={styles.formSection}>
             <legend>Professional Objective</legend>
-            <label className={styles.formLabel}>Write a strong career objective (80–120 words recommended; leave blank to auto-generate):</label>
-            <textarea className={styles.formTextarea} rows="5" placeholder="e.g. Highly motivated software engineer with 3 years of experience delivering scalable web applications..." value={personal.objective} onChange={(e) => setPersonal({ ...personal, objective: e.target.value })} />
+            <label className={styles.formLabel} htmlFor="pObjective">Write a strong career objective (80–120 words recommended; leave blank to auto-generate):</label>
+            <textarea className={styles.formTextarea} id="pObjective" rows="5" placeholder="e.g. Highly motivated software engineer with 3 years of experience delivering scalable web applications..." value={personal.objective} onChange={(e) => setPersonal({ ...personal, objective: e.target.value })} />
             <p className={styles.formHint}>
               {personal.objective.trim() ? `${personal.objective.trim().split(/\s+/).length} words` : "0 words"} — aim for a strong paragraph of about 80–120 words.
             </p>
@@ -146,8 +146,8 @@ const Registration = () => {
 
           <fieldset className={styles.formSection}>
             <legend>Field of Study / Profession</legend>
-            <label className={styles.formLabel}>Your field *</label>
-            <input type="text" className={styles.formInput} list="fieldList" placeholder="Type or select your field" value={personal.field} onChange={handleFieldChange} />
+            <label className={styles.formLabel} htmlFor="pField">Your field *</label>
+            <input type="text" id="pField" className={styles.formInput} list="fieldList" placeholder="Type or select your field" value={personal.field} onChange={handleFieldChange} />
             <datalist id="fieldList">
               {FIELD_OPTIONS.map((f, i) => <option key={i} value={f} />)}
             </datalist>
@@ -167,13 +167,14 @@ const Registration = () => {
                 {experience.map((exp, i) => (
                   <div key={i} style={{ marginTop: "0.5rem" }}>
                     <div className={styles.multiRow}>
-                      <input type="text" placeholder="Company *" className={styles.formInput} value={exp.company} onChange={(e) => { const l = [...experience]; l[i].company = e.target.value; setExperience(l); }} />
-                      <input type="text" placeholder="Role *" className={styles.formInput} value={exp.role} onChange={(e) => { const l = [...experience]; l[i].role = e.target.value; setExperience(l); }} />
-                      <input type="text" placeholder="Duration *" className={styles.formInput} value={exp.duration} onChange={(e) => { const l = [...experience]; l[i].duration = e.target.value; setExperience(l); }} />
+                      <input type="text" placeholder="Company *" aria-label={`Experience ${i + 1} company`} className={styles.formInput} value={exp.company} onChange={(e) => { const l = [...experience]; l[i].company = e.target.value; setExperience(l); }} />
+                      <input type="text" placeholder="Role *" aria-label={`Experience ${i + 1} role`} className={styles.formInput} value={exp.role} onChange={(e) => { const l = [...experience]; l[i].role = e.target.value; setExperience(l); }} />
+                      <input type="text" placeholder="Duration *" aria-label={`Experience ${i + 1} duration`} className={styles.formInput} value={exp.duration} onChange={(e) => { const l = [...experience]; l[i].duration = e.target.value; setExperience(l); }} />
                     </div>
                     <textarea
                       className={styles.formTextarea}
                       rows="3"
+                      aria-label={`Experience ${i + 1} achievements`}
                       placeholder={"Key achievements & responsibilities (one per line, 4–6 lines) e.g.\nDeveloped a customer portal that reduced response time by 30%"}
                       value={exp.achievements}
                       onChange={(e) => { const l = [...experience]; l[i].achievements = e.target.value; setExperience(l); }}
@@ -190,10 +191,10 @@ const Registration = () => {
             {education.map((edu, i) => (
               <div key={i} style={{ marginBottom: "0.8rem" }}>
                 <div className={styles.multiRow}>
-                  <input type="text" placeholder="Level * (e.g. Bachelor's)" className={styles.formInput} value={edu.level} onChange={(e) => { const l = [...education]; l[i].level = e.target.value; setEducation(l); }} />
-                  <input type="text" placeholder="Institute *" className={styles.formInput} value={edu.institute} onChange={(e) => { const l = [...education]; l[i].institute = e.target.value; setEducation(l); }} />
-                  <input type="text" placeholder="Year *" className={styles.formInput} value={edu.year} onChange={(e) => { const l = [...education]; l[i].year = e.target.value; setEducation(l); }} />
-                  <input type="text" placeholder="Marks/GPA (optional)" className={styles.formInput} value={edu.marks} onChange={(e) => { const l = [...education]; l[i].marks = e.target.value; setEducation(l); }} />
+                  <input type="text" placeholder="Level * (e.g. Bachelor's)" aria-label={`Education ${i + 1} level`} className={styles.formInput} value={edu.level} onChange={(e) => { const l = [...education]; l[i].level = e.target.value; setEducation(l); }} />
+                  <input type="text" placeholder="Institute *" aria-label={`Education ${i + 1} institute`} className={styles.formInput} value={edu.institute} onChange={(e) => { const l = [...education]; l[i].institute = e.target.value; setEducation(l); }} />
+                  <input type="text" placeholder="Year *" aria-label={`Education ${i + 1} year`} className={styles.formInput} value={edu.year} onChange={(e) => { const l = [...education]; l[i].year = e.target.value; setEducation(l); }} />
+                  <input type="text" placeholder="Marks/GPA (optional)" aria-label={`Education ${i + 1} marks or GPA`} className={styles.formInput} value={edu.marks} onChange={(e) => { const l = [...education]; l[i].marks = e.target.value; setEducation(l); }} />
                 </div>
               </div>
             ))}
@@ -204,7 +205,7 @@ const Registration = () => {
             <legend>Skills</legend>
             {skills.map((skill, i) => (
               <div key={i} style={{ marginBottom: "0.4rem" }}>
-                <input type="text" placeholder="Skill *" className={styles.formInput} value={skill} onChange={(e) => { const l = [...skills]; l[i] = e.target.value; setSkills(l); }} />
+                <input type="text" placeholder="Skill *" aria-label={`Skill ${i + 1}`} className={styles.formInput} value={skill} onChange={(e) => { const l = [...skills]; l[i] = e.target.value; setSkills(l); }} />
               </div>
             ))}
             <button type="button" className={styles.addBtn} onClick={addSkill}>+ Add Another Skill</button>
@@ -214,24 +215,24 @@ const Registration = () => {
             <fieldset className={styles.formSection}>
               <legend>Additional Information</legend>
               <p className={styles.formHint}>Separate multiple entries with commas. These appear as bullet points on your ATS resume.</p>
-              <label className={styles.formLabel}>Certifications</label>
-              <input type="text" className={styles.formInput} placeholder="e.g. AWS Certified Solutions Architect, PMP" value={additional.certifications} onChange={(e) => setAdditional({ ...additional, certifications: e.target.value })} />
-              <label className={styles.formLabel}>Languages</label>
-              <input type="text" className={styles.formInput} placeholder="e.g. English, Urdu, Arabic" value={additional.languages} onChange={(e) => setAdditional({ ...additional, languages: e.target.value })} />
-              <label className={styles.formLabel}>Technical Tools</label>
-              <input type="text" className={styles.formInput} placeholder="e.g. React, Node.js, Docker, Git" value={additional.tools} onChange={(e) => setAdditional({ ...additional, tools: e.target.value })} />
-              <label className={styles.formLabel}>Licenses</label>
-              <input type="text" className={styles.formInput} placeholder="e.g. Driver's License, Certified Ethical Hacker" value={additional.licenses} onChange={(e) => setAdditional({ ...additional, licenses: e.target.value })} />
-              <label className={styles.formLabel}>Strengths</label>
-              <input type="text" className={styles.formInput} placeholder="e.g. Leadership, Adaptability, Communication" value={additional.strengths} onChange={(e) => setAdditional({ ...additional, strengths: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="addCerts">Certifications</label>
+              <input type="text" id="addCerts" className={styles.formInput} placeholder="e.g. AWS Certified Solutions Architect, PMP" value={additional.certifications} onChange={(e) => setAdditional({ ...additional, certifications: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="addLangs">Languages</label>
+              <input type="text" id="addLangs" className={styles.formInput} placeholder="e.g. English, Urdu, Arabic" value={additional.languages} onChange={(e) => setAdditional({ ...additional, languages: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="addTools">Technical Tools</label>
+              <input type="text" id="addTools" className={styles.formInput} placeholder="e.g. React, Node.js, Docker, Git" value={additional.tools} onChange={(e) => setAdditional({ ...additional, tools: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="addLicenses">Licenses</label>
+              <input type="text" id="addLicenses" className={styles.formInput} placeholder="e.g. Driver's License, Certified Ethical Hacker" value={additional.licenses} onChange={(e) => setAdditional({ ...additional, licenses: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="addStrengths">Strengths</label>
+              <input type="text" id="addStrengths" className={styles.formInput} placeholder="e.g. Leadership, Adaptability, Communication" value={additional.strengths} onChange={(e) => setAdditional({ ...additional, strengths: e.target.value })} />
             </fieldset>
           )}
 
           {portfolioType === "standard" && (
           <fieldset className={styles.formSection}>
             <legend>Profile Picture (Optional)</legend>
-            <label className={styles.formLabel}>Upload Picture:</label>
-            <input type="file" accept=".jpg,.jpeg,.png" className={styles.formInput} onChange={handleFile} />
+            <label className={styles.formLabel} htmlFor="pPicture">Upload Picture:</label>
+            <input type="file" id="pPicture" accept=".jpg,.jpeg,.png" className={styles.formInput} onChange={handleFile} />
             {personal.picture && <p style={{ marginTop: "0.3rem", fontSize: "0.8rem", color: "#6c3baa" }}>&#10003; Picture uploaded</p>}
           </fieldset>
           )}
@@ -239,14 +240,14 @@ const Registration = () => {
           {portfolioType === "standard" && (
             <fieldset className={styles.formSection}>
               <legend>Portfolio Colors</legend>
-              <label className={styles.formLabel}>Primary:</label>
-              <input type="color" className={styles.formInput} value={colors.primary} onChange={(e) => setColors({ ...colors, primary: e.target.value })} />
-              <label className={styles.formLabel}>Secondary:</label>
-              <input type="color" className={styles.formInput} value={colors.secondary} onChange={(e) => setColors({ ...colors, secondary: e.target.value })} />
-              <label className={styles.formLabel}>Background:</label>
-              <input type="color" className={styles.formInput} value={colors.background} onChange={(e) => setColors({ ...colors, background: e.target.value })} />
-              <label className={styles.formLabel}>Text:</label>
-              <input type="color" className={styles.formInput} value={colors.textColor} onChange={(e) => setColors({ ...colors, textColor: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="cPrimary">Primary:</label>
+              <input type="color" id="cPrimary" className={styles.formInput} value={colors.primary} onChange={(e) => setColors({ ...colors, primary: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="cSecondary">Secondary:</label>
+              <input type="color" id="cSecondary" className={styles.formInput} value={colors.secondary} onChange={(e) => setColors({ ...colors, secondary: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="cBackground">Background:</label>
+              <input type="color" id="cBackground" className={styles.formInput} value={colors.background} onChange={(e) => setColors({ ...colors, background: e.target.value })} />
+              <label className={styles.formLabel} htmlFor="cText">Text:</label>
+              <input type="color" id="cText" className={styles.formInput} value={colors.textColor} onChange={(e) => setColors({ ...colors, textColor: e.target.value })} />
             </fieldset>
           )}
 

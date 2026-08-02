@@ -5,9 +5,11 @@ const ContactUs = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState(null); // null | "sending" | "success" | "error"
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setStatus("sending");
 
     const scriptURL =
       "https://script.google.com/macros/s/AKfycbwSoQoWzVcSicFbB2i7YhGjY34DnDK2gzXTtA4NLsPunLIfMUg1UjGKOiZA908gNQh6/exec";
@@ -22,13 +24,13 @@ const ContactUs = () => {
       body: formData,
     })
       .then(() => {
-        alert("Message sent successfully");
+        setStatus("success");
         setName("");
         setEmail("");
         setMessage("");
       })
       .catch(() => {
-        alert("Failed to send message");
+        setStatus("error");
       });
   };
 
@@ -75,9 +77,15 @@ const ContactUs = () => {
               required
             ></textarea>
 
-            <button type="submit" className={styles.formBtn}>
-              Send Message
+            <button type="submit" className={styles.formBtn} disabled={status === "sending"}>
+              {status === "sending" ? "Sending…" : "Send Message"}
             </button>
+            {status === "success" && (
+              <p className={styles.statusMsg} role="status">&#10003; Message sent successfully.</p>
+            )}
+            {status === "error" && (
+              <p className={`${styles.statusMsg} ${styles.statusError}`} role="alert">&#9888; Failed to send message. Please try again.</p>
+            )}
           </fieldset>
         </form>
       </section>

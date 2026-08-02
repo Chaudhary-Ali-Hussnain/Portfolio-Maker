@@ -117,6 +117,28 @@ body {
   background: #6c3baa;
 }
 
+.formBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.statusMsg {
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  text-align: center;
+  background: #e7f6e7;
+  color: #1a7f37;
+  border: 1px solid #b7e4c7;
+}
+
+.statusError {
+  background: #fdecec;
+  color: #b3261e;
+  border: 1px solid #f5c6c6;
+}
+
 .contactSection {
   max-width: 50rem;
   margin: 2rem auto;
