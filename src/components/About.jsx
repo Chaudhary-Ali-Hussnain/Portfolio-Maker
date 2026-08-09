@@ -54,6 +54,10 @@ const About = () => {
 
       <footer className={styles.mainFooter}>
         © 2025 Military Society — All Rights Reserved
+        <p className="sv-credit">
+          Website designed &amp; developed by{" "}
+          <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a>
+        </p>
       </footer>
     </div>
   );

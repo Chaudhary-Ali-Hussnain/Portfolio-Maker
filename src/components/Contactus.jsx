@@ -113,6 +113,10 @@ const ContactUs = () => {
 
       <footer className={styles.mainFooter}>
         <p>© 2025 Portfolio Maker | All Rights Reserved</p>
+        <p className="sv-credit">
+          Website designed &amp; developed by{" "}
+          <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a>
+        </p>
       </footer>
     </div>
   );

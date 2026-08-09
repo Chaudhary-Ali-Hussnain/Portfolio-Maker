@@ -255,6 +255,13 @@ const Registration = () => {
           <button type="button" className={styles.formBtn} onClick={resetAll}>Clear All</button>
         </form>
       </div>
+
+      <footer className="sv-footer">
+        <p className="sv-credit">
+          Website designed &amp; developed by{" "}
+          <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a>
+        </p>
+      </footer>
     </div>
   );
 };

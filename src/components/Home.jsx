@@ -69,6 +69,10 @@ const Home = () => {
 
       <footer className={styles.footer}>
         <p>© 2025 Portfolio Maker</p>
+        <p className="sv-credit">
+          Website designed &amp; developed by{" "}
+          <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a>
+        </p>
       </footer>
     </div>
   );
