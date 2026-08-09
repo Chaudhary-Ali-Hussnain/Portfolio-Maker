@@ -2,7 +2,6 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../Portfolio.module.css";
 import jsPDF from "jspdf";
-import FitA4 from "./FitA4";
 
 const A4_W = 595.28; // pt
 const A4_H = 841.89; // pt
@@ -65,19 +64,19 @@ const Portfolio = () => {
     }
 
     // Standard portfolio: rasterize via html2canvas (loaded on demand).
+    // The sheet is fluid on screen, so force a fixed 794px width in the clone
+    // to capture an A4-shaped image regardless of the current viewport.
     const html2canvas = (await import("html2canvas")).default;
-    const btn = document.getElementById("downloadBtn");
-    if (btn) btn.style.display = "none";
     const el = document.getElementById("portfolioBox");
     const canvas = await html2canvas(el, {
       scale: 2,
       backgroundColor: "#ffffff",
       onclone: (doc) => {
-        // Render the sheet at its natural size regardless of FitA4's scale.
-        const inner = doc.getElementById("fitWrapper");
-        if (inner) inner.style.transform = "none";
-        const outer = doc.querySelector("[data-fit-outer]");
-        if (outer) outer.style.height = "auto";
+        const box = doc.getElementById("portfolioBox");
+        if (box) {
+          box.style.width = "794px";
+          box.style.maxWidth = "794px";
+        }
       },
     });
     const imgData = canvas.toDataURL("image/png");
@@ -87,7 +86,6 @@ const Portfolio = () => {
     const ph = (imgProps.height * pw) / imgProps.width;
     pdf.addImage(imgData, "PNG", 0, 0, pw, ph);
     pdf.save("portfolio.pdf");
-    if (btn) btn.style.display = "block";
   };
 
   // ── Text-based ATS PDF export ──
@@ -258,85 +256,90 @@ const Portfolio = () => {
     </section>
   );
 
+  const stdSection = (title, children) => (
+    <section className={styles.stdSection}>
+      <h3 className={styles.stdSectionTitle}>{title}</h3>
+      {children}
+    </section>
+  );
+
   // ── Professional ATS Resume Template ──
   if (portfolioType === "ats") {
     const objective = (personal.objective || "").trim() || buildObjective(personal, skills, experience);
 
     return (
       <div className={styles.atsPage}>
-        <div className={styles.atsToolbar}>
+        <div className={styles.toolbar}>
           <button className={styles.downloadBtn} onClick={downloadPDF}>
             Download PDF
           </button>
         </div>
-        <FitA4 width={794} id="fitWrapper">
-          <div className={styles.atsBox} id="portfolioBox">
-            <header className={styles.atsHeader}>
-              <h1>{personal.name || "Your Name"}</h1>
-              <p className={styles.atsContact}>
-                {[personal.contact, personal.email, personal.gender, personal.age ? `Age: ${personal.age}` : "", personal.field]
-                  .filter(Boolean)
-                  .join("   |   ")}
-              </p>
-            </header>
+        <div className={styles.atsBox} id="portfolioBox">
+          <header className={styles.atsHeader}>
+            <h1>{personal.name || "Your Name"}</h1>
+            <p className={styles.atsContact}>
+              {[personal.contact, personal.email, personal.gender, personal.age ? `Age: ${personal.age}` : "", personal.field]
+                .filter(Boolean)
+                .join("   |   ")}
+            </p>
+          </header>
 
-            {renderSection("Professional Objective", <p className={styles.atsObjective}>{objective}</p>)}
+          {renderSection("Professional Objective", <p className={styles.atsObjective}>{objective}</p>)}
 
-            {renderSection("Core Skills", (
-              <ul className={styles.atsSkills}>
-                {skills.map((skill, i) => <li key={i}>{skill}</li>)}
-              </ul>
-            ))}
+          {renderSection("Core Skills", (
+            <ul className={styles.atsSkills}>
+              {skills.map((skill, i) => <li key={i}>{skill}</li>)}
+            </ul>
+          ))}
 
-            {renderSection("Professional Experience", (
-              experience.length === 0 ? (
-                <p className={styles.atsMuted}>No professional experience provided.</p>
-              ) : (
-                experience.map((exp, i) => {
-                  const bullets = toList(exp.achievements);
-                  return (
-                    <div key={i} className={styles.atsExp}>
-                      <div className={styles.atsExpHeader}>
-                        <span className={styles.atsExpCompany}>{exp.company}</span>
-                        <span className={styles.atsExpDur}>{exp.duration}</span>
-                      </div>
-                      {exp.role && <div className={styles.atsExpRole}>{exp.role}</div>}
-                      {bullets.length > 0 && (
-                        <ul className={styles.atsExpList}>
-                          {bullets.map((b, j) => <li key={j}>{b}</li>)}
-                        </ul>
-                      )}
+          {renderSection("Professional Experience", (
+            experience.length === 0 ? (
+              <p className={styles.atsMuted}>No professional experience provided.</p>
+            ) : (
+              experience.map((exp, i) => {
+                const bullets = toList(exp.achievements);
+                return (
+                  <div key={i} className={styles.atsExp}>
+                    <div className={styles.atsExpHeader}>
+                      <span className={styles.atsExpCompany}>{exp.company}</span>
+                      <span className={styles.atsExpDur}>{exp.duration}</span>
                     </div>
-                  );
-                })
-              )
-            ))}
+                    {exp.role && <div className={styles.atsExpRole}>{exp.role}</div>}
+                    {bullets.length > 0 && (
+                      <ul className={styles.atsExpList}>
+                        {bullets.map((b, j) => <li key={j}>{b}</li>)}
+                      </ul>
+                    )}
+                  </div>
+                );
+              })
+            )
+          ))}
 
-            {renderSection("Education", (
-              education.map((edu, i) => (
-                <div key={i} className={styles.atsEdu}>
-                  <div className={styles.atsEduRow}>
-                    <span className={styles.atsEduDegree}>{edu.level}</span>
-                    <span className={styles.atsEduYear}>{edu.year}</span>
-                  </div>
-                  <div className={styles.atsEduSub}>
-                    {edu.institute}{edu.marks ? ` · ${edu.marks}` : ""}
-                  </div>
+          {renderSection("Education", (
+            education.map((edu, i) => (
+              <div key={i} className={styles.atsEdu}>
+                <div className={styles.atsEduRow}>
+                  <span className={styles.atsEduDegree}>{edu.level}</span>
+                  <span className={styles.atsEduYear}>{edu.year}</span>
                 </div>
-              ))
-            ))}
+                <div className={styles.atsEduSub}>
+                  {edu.institute}{edu.marks ? ` · ${edu.marks}` : ""}
+                </div>
+              </div>
+            ))
+          ))}
 
-            {additionalSections.length > 0 && renderSection("Additional Information", (
-              <ul className={styles.atsAddList}>
-                {additionalSections.map((sec, i) => (
-                  <li key={i}>
-                    <span className={styles.atsAddTitle}>{sec.title}:</span> {sec.items.join(", ")}
-                  </li>
-                ))}
-              </ul>
-            ))}
-          </div>
-        </FitA4>
+          {additionalSections.length > 0 && renderSection("Additional Information", (
+            <ul className={styles.atsAddList}>
+              {additionalSections.map((sec, i) => (
+                <li key={i}>
+                  <span className={styles.atsAddTitle}>{sec.title}:</span> {sec.items.join(", ")}
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </div>
     );
   }
@@ -349,104 +352,75 @@ const Portfolio = () => {
     text: c.textColor,
     lightBg: c.background + "15",
   };
+  const contactParts = [personal.email, personal.contact, personal.gender, personal.age ? `Age: ${personal.age}` : "", personal.field]
+    .filter(Boolean);
 
   return (
     <div className={styles.portfolioPage} style={{ background: `linear-gradient(to bottom, ${s.bg}, ${s.secondary}, ${s.bg})` }}>
-      <FitA4 width={794} id="fitWrapper">
-        <div className={styles.portfolioBox} id="portfolioBox" style={{ background: "#fff" }}>
-          <div className={styles.portfolioHeader}>
-            <h1 className={styles.portfolioTitle} style={{ color: s.primary }}>Portfolio</h1>
-            <button id="downloadBtn" className={styles.downloadBtn} onClick={downloadPDF}
-              style={{ background: s.secondary }}>
-              Download PDF
-            </button>
-          </div>
-
-          <div className={styles.profileRow}>
-            {personal.picture && (
-              <div className={styles.profileImg}>
-                <img src={personal.picture} alt="Profile" style={{ border: `3px solid ${s.primary}` }} />
-              </div>
-            )}
-            <div className={styles.profileInfo}>
-              <h2 style={{ color: s.primary }}>{personal.name}</h2>
-              <p>Email: {personal.email}</p>
-              {personal.contact && <p>Contact: {personal.contact}</p>}
-              <p>Age: {personal.age}</p>
-              <p>Gender: {personal.gender}</p>
-              {personal.field && <p>Field: {personal.field}</p>}
-            </div>
-          </div>
-
-          {personal.objective && (
-            <div className={styles.section}>
-              <h3 style={{ color: s.primary, borderBottom: `2px solid ${s.secondary}` }}>Objective</h3>
-              <p style={{ fontSize: "0.9rem", lineHeight: "1.6", color: "#333" }}>{personal.objective}</p>
-            </div>
+      <div className={styles.toolbar}>
+        <button id="downloadBtn" className={styles.downloadBtn} onClick={downloadPDF} style={{ background: s.secondary }}>
+          Download PDF
+        </button>
+      </div>
+      <div
+        className={styles.portfolioBox}
+        id="portfolioBox"
+        style={{ background: "#fff", "--primary": s.primary, "--secondary": s.secondary }}
+      >
+        <header className={styles.stdHeader}>
+          {personal.picture && (
+            <img className={styles.stdPhoto} src={personal.picture} alt="Profile" />
           )}
+          <h1>{personal.name || "Your Name"}</h1>
+          {contactParts.length > 0 && <p className={styles.stdContact}>{contactParts.join("  ·  ")}</p>}
+        </header>
 
-          <div className={styles.section}>
-            <h3 style={{ color: s.primary, borderBottom: `2px solid ${s.secondary}` }}>Education</h3>
-            <div className={styles.tableWrap}>
-              <table className={styles.table}>
-                <thead><tr>
-                  <th style={{ background: s.primary }}>Level</th>
-                  <th style={{ background: s.primary }}>Institute</th>
-                  <th style={{ background: s.primary }}>Year</th>
-                  <th style={{ background: s.primary }}>Marks/GPA</th>
-                </tr></thead>
-                <tbody>
-                  {education.map((item, i) => (
-                    <tr key={i}>
-                      <td>{item.level}</td>
-                      <td>{item.institute}</td>
-                      <td>{item.year}</td>
-                      <td>{item.marks || "—"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+        {personal.objective && stdSection("Professional Objective", (
+          <p className={styles.stdObjective}>{personal.objective}</p>
+        ))}
 
-          <div className={styles.section}>
-            <h3 style={{ color: s.primary, borderBottom: `2px solid ${s.secondary}` }}>Skills</h3>
-            <ul className={styles.skillsList}>
-              {skills.map((skill, i) => (
-                <li key={i}>{skill}</li>
-              ))}
-            </ul>
-          </div>
-
-          {experience.length > 0 && (
-            <div className={styles.section}>
-              <h3 style={{ color: s.primary, borderBottom: `2px solid ${s.secondary}` }}>Experience</h3>
-              <div className={styles.tableWrap}>
-                <table className={styles.table}>
-                  <thead><tr>
-                    <th style={{ background: s.primary }}>Company</th>
-                    <th style={{ background: s.primary }}>Role</th>
-                    <th style={{ background: s.primary }}>Duration</th>
-                  </tr></thead>
-                  <tbody>
-                    {experience.map((item, i) => (
-                      <tr key={i}>
-                        <td>{item.company}</td>
-                        <td>{item.role}</td>
-                        <td>{item.duration}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+        {stdSection("Education", (
+          education.map((item, i) => (
+            <div key={i} className={styles.atsEdu}>
+              <div className={styles.atsEduRow}>
+                <span className={styles.atsEduDegree}>{item.level}</span>
+                <span className={styles.atsEduYear}>{item.year}</span>
+              </div>
+              <div className={styles.atsEduSub}>
+                {item.institute}{item.marks ? ` · ${item.marks}` : ""}
               </div>
             </div>
-          )}
+          ))
+        ))}
 
-          <div style={{ textAlign: "center", marginTop: "1.5rem", color: s.secondary, fontSize: "0.85rem" }}>
-            Generated by Portfolio Maker
-          </div>
-        </div>
-      </FitA4>
+        {stdSection("Skills", (
+          <ul className={styles.stdSkills}>
+            {skills.map((skill, i) => <li key={i}>{skill}</li>)}
+          </ul>
+        ))}
+
+        {experience.length > 0 && stdSection("Experience", (
+          experience.map((item, i) => {
+            const bullets = toList(item.achievements);
+            return (
+              <div key={i} className={styles.atsExp}>
+                <div className={styles.atsExpHeader}>
+                  <span className={styles.atsExpCompany}>{item.company}</span>
+                  <span className={styles.atsExpDur}>{item.duration}</span>
+                </div>
+                {item.role && <div className={styles.atsExpRole}>{item.role}</div>}
+                {bullets.length > 0 && (
+                  <ul className={styles.atsExpList}>
+                    {bullets.map((b, j) => <li key={j}>{b}</li>)}
+                  </ul>
+                )}
+              </div>
+            );
+          })
+        ))}
+
+        <div className={styles.stdFooter}>Generated by Portfolio Maker</div>
+      </div>
     </div>
   );
 };

@@ -34,17 +34,9 @@ const About = () => {
               <td>
                 <img src="/chaudhary .jpg" width="70" alt="Ali" />
               </td>
-              <td>Ali Hassanain</td>
+              <td>Chaudhary Ali Hussnain</td>
               <td>President</td>
               <td>0300-0000000</td>
-            </tr>
-            <tr>
-              <td>
-                <img src="/hassan.jpg" width="70" alt="Ahmed" />
-              </td>
-              <td>Ahmed Khan</td>
-              <td>Vice President</td>
-              <td>0311-1111111</td>
             </tr>
             <tr>
               <td>
