@@ -72,6 +72,94 @@ body {
   max-width: 50rem;
 }
 
+.creatorCard {
+  max-width: 50rem;
+  width: 92%;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  background: white;
+  padding: clamp(1rem, 3vw, 2.2rem);
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.creatorImg {
+  width: clamp(7rem, 22vw, 11rem);
+  height: clamp(7rem, 22vw, 11rem);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 0.25rem solid #8b5cf6;
+  flex-shrink: 0;
+}
+
+.creatorInfo {
+  min-width: 0;
+}
+
+.creatorTitle {
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: #6c3baa;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
+}
+
+.creatorName {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: #1a1a3e;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.creatorRole {
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  color: #555;
+  margin-bottom: 0.75rem;
+}
+
+.creatorInfo p:last-of-type {
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  line-height: 1.7;
+  color: #333;
+}
+
+.creatorInfo a {
+  color: #8b5cf6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.creatorInfo a:hover {
+  text-decoration: underline;
+}
+
+.creatorContact {
+  margin-top: 0.9rem;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: #333;
+  word-break: break-all;
+}
+
+.creatorContact a {
+  color: #8b5cf6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.creatorContact a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .creatorCard {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
 .teamTableContainer {
   max-width: 95%;
   margin: 2rem auto;

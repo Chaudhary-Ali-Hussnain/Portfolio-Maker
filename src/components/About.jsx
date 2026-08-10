@@ -19,6 +19,23 @@ const About = () => {
         </p>
       </section>
 
+      <section className={styles.creatorCard}>
+        <img src="/chaudhary .jpg" alt="Chaudhary Ali Hussnain" className={styles.creatorImg} />
+        <div className={styles.creatorInfo}>
+          <h3 className={styles.creatorTitle}>About the Maker</h3>
+          <p className={styles.creatorName}>Chaudhary Ali Hussnain</p>
+          <p className={styles.creatorRole}>Founder &amp; Creator</p>
+          <p>
+            This website is designed &amp; developed by{" "}
+            <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a> —
+            explore our team, activities, and achievements to learn more.
+          </p>
+          <p className={styles.creatorContact}>
+            Contact: <a href="mailto:striversoffical@gmail.com">striversoffical@gmail.com</a>
+          </p>
+        </div>
+      </section>
+
       <div className={styles.teamTableContainer}>
         <table className={styles.teamTable}>
           <thead>
