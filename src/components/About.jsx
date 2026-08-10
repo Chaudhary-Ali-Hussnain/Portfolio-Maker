@@ -27,8 +27,8 @@ const About = () => {
           <p className={styles.creatorRole}>Founder &amp; Creator</p>
           <p>
             This website is designed &amp; developed by{" "}
-            <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a> —
-            explore our team, activities, and achievements to learn more.
+            <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a>.
+            Explore our team, activities, and achievements to learn more.
           </p>
           <p className={styles.creatorContact}>
             Contact: <a href="mailto:striversoffical@gmail.com">striversoffical@gmail.com</a>
@@ -70,7 +70,7 @@ const About = () => {
       
 
       <footer className={styles.mainFooter}>
-        © 2025 Military Society — All Rights Reserved
+        © 2025 Military Society. All Rights Reserved
         <p className="sv-credit">
           Website designed &amp; developed by{" "}
           <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a>

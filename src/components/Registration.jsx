@@ -112,7 +112,7 @@ const Registration = () => {
               <input type="radio" id="ptStd" name="pt" value="standard" checked={portfolioType === "standard"} onChange={() => setPortfolioType("standard")} />
               <label htmlFor="ptStd">Standard Portfolio</label>
               <input type="radio" id="ptAts" name="pt" value="ats" checked={portfolioType === "ats"} onChange={() => setPortfolioType("ats")} />
-              <label htmlFor="ptAts">ATS-Friendly Resume</label>
+              <label htmlFor="ptAts">ATS Friendly Resume</label>
             </div>
           </fieldset>
 
@@ -137,10 +137,10 @@ const Registration = () => {
 
           <fieldset className={styles.formSection}>
             <legend>Professional Objective</legend>
-            <label className={styles.formLabel} htmlFor="pObjective">Write a strong career objective (80–120 words recommended; leave blank to auto-generate):</label>
+            <label className={styles.formLabel} htmlFor="pObjective">Write a strong career objective (80 to 120 words recommended; leave blank to auto-generate):</label>
             <textarea className={styles.formTextarea} id="pObjective" rows="5" placeholder="e.g. Highly motivated software engineer with 3 years of experience delivering scalable web applications..." value={personal.objective} onChange={(e) => setPersonal({ ...personal, objective: e.target.value })} />
             <p className={styles.formHint}>
-              {personal.objective.trim() ? `${personal.objective.trim().split(/\s+/).length} words` : "0 words"} — aim for a strong paragraph of about 80–120 words.
+              {personal.objective.trim() ? `${personal.objective.trim().split(/\s+/).length} words` : "0 words"}. Aim for a strong paragraph of about 80 to 120 words.
             </p>
           </fieldset>
 
@@ -175,7 +175,7 @@ const Registration = () => {
                       className={styles.formTextarea}
                       rows="3"
                       aria-label={`Experience ${i + 1} achievements`}
-                      placeholder={"Key achievements & responsibilities (one per line, 4–6 lines) e.g.\nDeveloped a customer portal that reduced response time by 30%"}
+                      placeholder={"Key achievements & responsibilities (one per line, 4 to 6 lines) e.g.\nDeveloped a customer portal that reduced response time by 30%"}
                       value={exp.achievements}
                       onChange={(e) => { const l = [...experience]; l[i].achievements = e.target.value; setExperience(l); }}
                     />

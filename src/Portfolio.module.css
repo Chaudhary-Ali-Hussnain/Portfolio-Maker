@@ -49,11 +49,13 @@
   max-width: 794px;
   margin: 0 auto;
   background: #fff;
-  padding: 2.2rem 2.5rem;
+  padding: 0;
   box-sizing: border-box;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
   font-family: var(--font-sans);
   color: #1c2129;
+  min-height: 1123px;
+  overflow: hidden;
 }
 
 /* Header — centered name + contact, optional photo */
@@ -153,6 +155,119 @@
   color: var(--secondary);
   font-size: 0.8rem;
   letter-spacing: 0.03em;
+}
+
+/* ── Standard Portfolio: Sidebar Resume ──
+   A colored sidebar (user theme colors) carries the photo, contact and
+   skills; the main column stays white with the narrative sections. */
+.sidebarLayout {
+  display: flex;
+  align-items: stretch;
+  min-height: 1123px;
+}
+
+.sidebar {
+  flex: 0 0 280px;
+  width: 280px;
+  box-sizing: border-box;
+  color: #ffffff;
+  padding: 2.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarPhoto {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  margin: 0 auto 1rem;
+  display: block;
+}
+
+.sidebarName {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  text-align: center;
+  color: #ffffff;
+  margin: 0 0 0.3rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.sidebarRole {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0.92;
+  margin: 0 0 0.2rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.sidebarBlock {
+  margin-top: 1.15rem;
+}
+
+.sidebarHeading {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 0.3rem;
+  margin: 0 0 0.6rem;
+}
+
+.sidebarList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebarList li {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-bottom: 0.3rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.sidebarSkills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebarSkills li {
+  position: relative;
+  padding-left: 1rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-bottom: 0.28rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.sidebarSkills li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.sidebarMain {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  background: #ffffff;
+  padding: 2.2rem 2.4rem;
 }
 
 .noData {
@@ -422,8 +537,27 @@
     padding: 1rem 0.75rem;
   }
 
-  .atsBox,
+  .atsBox {
+    padding: 1.4rem 1.1rem;
+  }
+
+  /* Stack the sidebar resume: colored band on top, white content below. */
   .portfolioBox {
+    min-height: 0;
+  }
+
+  .sidebarLayout {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .sidebar {
+    flex: none;
+    width: 100%;
+    padding: 2rem 1.4rem;
+  }
+
+  .sidebarMain {
     padding: 1.4rem 1.1rem;
   }
 
@@ -448,6 +582,11 @@
     height: 104px;
   }
 
+  .sidebarPhoto {
+    width: 96px;
+    height: 96px;
+  }
+
   .downloadBtn,
   .backBtn {
     min-height: 44px;
@@ -470,8 +609,15 @@
     padding: 0.75rem 0.6rem;
   }
 
-  .atsBox,
-  .portfolioBox {
+  .atsBox {
+    padding: 1.2rem 0.9rem;
+  }
+
+  .sidebar {
+    padding: 1.6rem 1.1rem;
+  }
+
+  .sidebarMain {
     padding: 1.2rem 0.9rem;
   }
 
