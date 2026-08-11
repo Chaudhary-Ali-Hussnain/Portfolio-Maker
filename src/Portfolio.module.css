@@ -55,7 +55,6 @@
   font-family: var(--font-sans);
   color: #1c2129;
   min-height: 1123px;
-  overflow: hidden;
 }
 
 /* Header — centered name + contact, optional photo */
@@ -268,6 +267,32 @@
   box-sizing: border-box;
   background: #ffffff;
   padding: 2.2rem 2.4rem;
+}
+
+.stdProject {
+  margin-bottom: 0.9rem;
+}
+
+.stdProject:last-child {
+  margin-bottom: 0;
+}
+
+.stdProjectTitle {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #10141a;
+  margin-bottom: 0.2rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.stdProjectText {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #2c313b;
+  margin: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .noData {
@@ -541,24 +566,22 @@
     padding: 1.4rem 1.1rem;
   }
 
-  /* Stack the sidebar resume: colored band on top, white content below. */
+  /* Keep the standard portfolio at A4 proportions on small screens;
+     the page scrolls or zooms horizontally instead of shrinking. */
   .portfolioBox {
-    min-height: 0;
+    width: 794px;
+    max-width: none;
+    margin: 0 auto;
+    min-height: 1123px;
   }
 
-  .sidebarLayout {
-    flex-direction: column;
-    min-height: 0;
+  .portfolioPage {
+    overflow-x: auto;
   }
 
-  .sidebar {
-    flex: none;
-    width: 100%;
-    padding: 2rem 1.4rem;
-  }
-
-  .sidebarMain {
-    padding: 1.4rem 1.1rem;
+  .sidebarPhoto {
+    width: 96px;
+    height: 96px;
   }
 
   /* Let short resumes flow at natural height instead of pinning to A4. */
@@ -580,11 +603,6 @@
   .stdPhoto {
     width: 104px;
     height: 104px;
-  }
-
-  .sidebarPhoto {
-    width: 96px;
-    height: 96px;
   }
 
   .downloadBtn,
@@ -627,6 +645,11 @@
 }
 
 /* ── Print ── */
+@page {
+  size: A4;
+  margin: 0;
+}
+
 @media print {
   .toolbar,
   .downloadBtn {

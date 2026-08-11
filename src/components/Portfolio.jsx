@@ -23,7 +23,7 @@ const Portfolio = () => {
     );
   }
 
-  const { personal, education, skills, experience, additional, colors, portfolioType } = data;
+  const { personal, education, skills, experience, additional, colors, portfolioType, projects = [], languages = [], professionalLinks = [], additionalInfo = [] } = data;
   const c = colors || { primary: "#6c3baa", secondary: "#8b5cf6", background: "#0f0c29", textColor: "#ffffff" };
 
   // Split a comma / semicolon / newline-separated string into a clean list.
@@ -65,26 +65,45 @@ const Portfolio = () => {
 
     // Standard portfolio: rasterize via html2canvas (loaded on demand).
     // The sheet is fluid on screen, so force a fixed 794px width in the clone
-    // to capture an A4-shaped image regardless of the current viewport.
+    // to capture A4 proportions regardless of the current viewport. If the
+    // content is taller than one A4 page it is sliced into full A4 pages, so
+    // nothing is ever shrunk, clipped, or cut off.
     const html2canvas = (await import("html2canvas")).default;
     const el = document.getElementById("portfolioBox");
+    const scale = 2;
     const canvas = await html2canvas(el, {
-      scale: 2,
+      scale,
       backgroundColor: "#ffffff",
       onclone: (doc) => {
         const box = doc.getElementById("portfolioBox");
         if (box) {
           box.style.width = "794px";
           box.style.maxWidth = "794px";
+          box.style.margin = "0";
+          box.style.boxShadow = "none";
         }
       },
     });
-    const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("p", "pt", "a4");
-    const imgProps = pdf.getImageProperties(imgData);
-    const pw = pdf.getPageWidth();
-    const ph = (imgProps.height * pw) / imgProps.width;
-    pdf.addImage(imgData, "PNG", 0, 0, pw, ph);
+    const pw = pdf.getPageWidth();  // 595.28pt
+    const pageHpx = 1123 * scale;   // A4 height in captured pixels
+    const totalH = canvas.height;
+    let y = 0;
+    let first = true;
+    while (y < totalH) {
+      if (!first) pdf.addPage();
+      first = false;
+      const sliceH = Math.min(pageHpx, totalH - y);
+      const slice = document.createElement("canvas");
+      slice.width = canvas.width;
+      slice.height = sliceH;
+      const ctx = slice.getContext("2d");
+      ctx.drawImage(canvas, 0, y, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
+      const img = slice.toDataURL("image/png");
+      const hPt = (sliceH / canvas.width) * pw;
+      pdf.addImage(img, "PNG", 0, 0, pw, hPt);
+      y += pageHpx;
+    }
     pdf.save("portfolio.pdf");
   };
 
@@ -352,8 +371,12 @@ const Portfolio = () => {
     text: c.textColor,
     lightBg: c.background + "15",
   };
-  const contactParts = [personal.email, personal.contact, personal.gender, personal.age ? `Age: ${personal.age}` : "", personal.field]
-    .filter(Boolean);
+  const genderLabel = ({ male: "Male", female: "Female" })[personal.gender] || "";
+  const sidebarContact = [personal.email, personal.contact, genderLabel, personal.age ? `Age: ${personal.age}` : ""].filter(Boolean);
+  const cleanProjects = (Array.isArray(projects) ? projects : []).filter((pr) => pr && String(pr.title || "").trim());
+  const cleanLanguages = (Array.isArray(languages) ? languages : []).map((l) => String(l || "").trim()).filter(Boolean);
+  const cleanLinks = (Array.isArray(professionalLinks) ? professionalLinks : []).filter((l) => l && String(l.url || "").trim());
+  const cleanAddInfo = (Array.isArray(additionalInfo) ? additionalInfo : []).filter((a) => a && String(a.title || "").trim());
 
   return (
     <div className={styles.portfolioPage} style={{ background: `linear-gradient(to bottom, ${s.bg}, ${s.secondary}, ${s.bg})` }}>
@@ -376,11 +399,11 @@ const Portfolio = () => {
               <h1 className={styles.sidebarName}>{personal.name || "Your Name"}</h1>
               {personal.field && <p className={styles.sidebarRole}>{personal.field}</p>}
 
-              {contactParts.length > 0 && (
+              {sidebarContact.length > 0 && (
                 <div className={styles.sidebarBlock}>
                   <h3 className={styles.sidebarHeading}>Contact</h3>
                   <ul className={styles.sidebarList}>
-                    {contactParts.map((part, i) => <li key={i}>{part}</li>)}
+                    {sidebarContact.map((part, i) => <li key={i}>{part}</li>)}
                   </ul>
                 </div>
               )}
@@ -393,11 +416,33 @@ const Portfolio = () => {
                   </ul>
                 </div>
               )}
+
+              {cleanLanguages.length > 0 && (
+                <div className={styles.sidebarBlock}>
+                  <h3 className={styles.sidebarHeading}>Languages</h3>
+                  <ul className={styles.sidebarSkills}>
+                    {cleanLanguages.map((lang, i) => <li key={i}>{lang}</li>)}
+                  </ul>
+                </div>
+              )}
+
+              {cleanLinks.length > 0 && (
+                <div className={styles.sidebarBlock}>
+                  <h3 className={styles.sidebarHeading}>Professional Links</h3>
+                  <ul className={styles.sidebarList}>
+                    {cleanLinks.map((lnk, i) => (
+                      <li key={i}>
+                        {lnk.type ? `${lnk.type}: ` : ""}{lnk.url}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </aside>
 
           <main className={styles.sidebarMain}>
-            {personal.objective && stdSection("Professional Objective", (
+            {personal.objective && stdSection("Professional Summary", (
               <p className={styles.stdObjective}>{personal.objective}</p>
             ))}
 
@@ -433,6 +478,24 @@ const Portfolio = () => {
                   </div>
                 );
               })
+            ))}
+
+            {cleanProjects.length > 0 && stdSection("Projects", (
+              cleanProjects.map((pr, i) => (
+                <div key={i} className={styles.stdProject}>
+                  <div className={styles.stdProjectTitle}>{pr.title}</div>
+                  {pr.description && <p className={styles.stdProjectText}>{pr.description}</p>}
+                </div>
+              ))
+            ))}
+
+            {cleanAddInfo.length > 0 && stdSection("Additional Information", (
+              cleanAddInfo.map((a, i) => (
+                <div key={i} className={styles.stdProject}>
+                  <div className={styles.stdProjectTitle}>{a.title}</div>
+                  {a.details && <p className={styles.stdProjectText}>{a.details}</p>}
+                </div>
+              ))
             ))}
 
             <div className={styles.stdFooter}>Generated by Portfolio Maker</div>
