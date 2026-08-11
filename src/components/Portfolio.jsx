@@ -3,6 +3,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../Portfolio.module.css";
 import jsPDF from "jspdf";
 
+const MailIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="m22 7-10 5L2 7" />
+  </svg>
+);
+
+const PhoneIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+  </svg>
+);
+
 const A4_W = 595.28; // pt
 const A4_H = 841.89; // pt
 const MARGIN = 40;   // pt
@@ -371,8 +384,10 @@ const Portfolio = () => {
     text: c.textColor,
     lightBg: c.background + "15",
   };
-  const genderLabel = ({ male: "Male", female: "Female" })[personal.gender] || "";
-  const sidebarContact = [personal.email, personal.contact, genderLabel, personal.age ? `Age: ${personal.age}` : ""].filter(Boolean);
+  // Sidebar contact: only real contact fields, never labels/placeholders.
+  const contactItems = [];
+  if (String(personal.email || "").trim()) contactItems.push({ icon: <MailIcon />, text: personal.email });
+  if (String(personal.contact || "").trim()) contactItems.push({ icon: <PhoneIcon />, text: personal.contact });
   const cleanProjects = (Array.isArray(projects) ? projects : []).filter((pr) => pr && String(pr.title || "").trim());
   const cleanLanguages = (Array.isArray(languages) ? languages : []).map((l) => String(l || "").trim()).filter(Boolean);
   const cleanLinks = (Array.isArray(professionalLinks) ? professionalLinks : []).filter((l) => l && String(l.url || "").trim());
@@ -393,17 +408,24 @@ const Portfolio = () => {
         <div className={styles.sidebarLayout}>
           <aside className={styles.sidebar} style={{ background: `linear-gradient(180deg, ${s.primary}, ${s.secondary})` }}>
             <div className={styles.sidebarInner}>
-              {personal.picture && (
-                <img className={styles.sidebarPhoto} src={personal.picture} alt="Profile" />
-              )}
-              <h1 className={styles.sidebarName}>{personal.name || "Your Name"}</h1>
-              {personal.field && <p className={styles.sidebarRole}>{personal.field}</p>}
+              <div className={styles.sidebarProfile}>
+                {personal.picture && (
+                  <img className={styles.sidebarPhoto} src={personal.picture} alt="Profile" />
+                )}
+                {personal.name && <h1 className={styles.sidebarName}>{personal.name}</h1>}
+                {personal.field && <p className={styles.sidebarRole}>{personal.field}</p>}
+              </div>
 
-              {sidebarContact.length > 0 && (
+              {contactItems.length > 0 && (
                 <div className={styles.sidebarBlock}>
                   <h3 className={styles.sidebarHeading}>Contact</h3>
-                  <ul className={styles.sidebarList}>
-                    {sidebarContact.map((part, i) => <li key={i}>{part}</li>)}
+                  <ul className={styles.sidebarContactList}>
+                    {contactItems.map((item, i) => (
+                      <li key={i} className={styles.sidebarContactItem}>
+                        <span className={styles.sidebarContactIcon} aria-hidden="true">{item.icon}</span>
+                        <span className={styles.sidebarContactText}>{item.text}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}
@@ -411,7 +433,7 @@ const Portfolio = () => {
               {skills.length > 0 && (
                 <div className={styles.sidebarBlock}>
                   <h3 className={styles.sidebarHeading}>Skills</h3>
-                  <ul className={styles.sidebarSkills}>
+                  <ul className={styles.sidebarSkillChips}>
                     {skills.map((skill, i) => <li key={i}>{skill}</li>)}
                   </ul>
                 </div>
@@ -420,9 +442,7 @@ const Portfolio = () => {
               {cleanLanguages.length > 0 && (
                 <div className={styles.sidebarBlock}>
                   <h3 className={styles.sidebarHeading}>Languages</h3>
-                  <ul className={styles.sidebarSkills}>
-                    {cleanLanguages.map((lang, i) => <li key={i}>{lang}</li>)}
-                  </ul>
+                  <p className={styles.sidebarLangText}>{cleanLanguages.join(", ")}</p>
                 </div>
               )}
 
@@ -430,9 +450,28 @@ const Portfolio = () => {
                 <div className={styles.sidebarBlock}>
                   <h3 className={styles.sidebarHeading}>Professional Links</h3>
                   <ul className={styles.sidebarList}>
-                    {cleanLinks.map((lnk, i) => (
+                    {cleanLinks.map((lnk, i) => {
+                      const label = String(lnk.type || "").trim();
+                      const cleanLabel = label && label !== "Other Professional Link" ? label : "";
+                      return (
+                        <li key={i} className={styles.sidebarLinkItem}>
+                          {cleanLabel && <span className={styles.sidebarLinkLabel}>{cleanLabel}</span>}
+                          <span className={styles.sidebarLinkUrl}>{lnk.url}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
+
+              {cleanAddInfo.length > 0 && (
+                <div className={styles.sidebarBlock}>
+                  <h3 className={styles.sidebarHeading}>Additional Information</h3>
+                  <ul className={styles.sidebarList}>
+                    {cleanAddInfo.map((a, i) => (
                       <li key={i}>
-                        {lnk.type ? `${lnk.type}: ` : ""}{lnk.url}
+                        <span className={styles.sidebarAddTitle}>{a.title}</span>
+                        {a.details && <span className={styles.sidebarAddDetails}>{a.details}</span>}
                       </li>
                     ))}
                   </ul>
@@ -485,15 +524,6 @@ const Portfolio = () => {
                 <div key={i} className={styles.stdProject}>
                   <div className={styles.stdProjectTitle}>{pr.title}</div>
                   {pr.description && <p className={styles.stdProjectText}>{pr.description}</p>}
-                </div>
-              ))
-            ))}
-
-            {cleanAddInfo.length > 0 && stdSection("Additional Information", (
-              cleanAddInfo.map((a, i) => (
-                <div key={i} className={styles.stdProject}>
-                  <div className={styles.stdProjectTitle}>{a.title}</div>
-                  {a.details && <p className={styles.stdProjectText}>{a.details}</p>}
                 </div>
               ))
             ))}

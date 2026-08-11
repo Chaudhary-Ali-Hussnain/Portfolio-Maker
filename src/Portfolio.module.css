@@ -175,6 +175,22 @@
   flex-direction: column;
 }
 
+/* The inner column fills the full sidebar height and distributes the
+   available vertical space evenly between sections, so a short resume
+   never leaves a dead gap at the bottom while long resumes flow
+   naturally at their own height. */
+.sidebarInner {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebarProfile {
+  text-align: center;
+}
+
 .sidebarPhoto {
   width: 112px;
   height: 112px;
@@ -238,27 +254,112 @@
   word-break: break-word;
 }
 
-.sidebarSkills {
+/* Contact — small icons alongside real values only */
+.sidebarContactList {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.sidebarSkills li {
-  position: relative;
-  padding-left: 1rem;
+.sidebarContactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
   font-size: 0.82rem;
-  line-height: 1.5;
-  margin-bottom: 0.28rem;
+  line-height: 1.45;
+  margin-bottom: 0.45rem;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
-.sidebarSkills li::before {
-  content: "\2022";
-  position: absolute;
-  left: 0;
-  top: 0;
+.sidebarContactItem:last-child {
+  margin-bottom: 0;
+}
+
+.sidebarContactIcon {
+  flex: 0 0 auto;
+  width: 15px;
+  margin-top: 1px;
+  opacity: 0.92;
+}
+
+.sidebarContactIcon svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+
+/* Skills — compact wrapping chips */
+.sidebarSkillChips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.sidebarSkillChips li {
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Languages — one compact line */
+.sidebarLangText {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Professional links — clean label over its URL */
+.sidebarLinkItem {
+  margin-bottom: 0.5rem;
+}
+
+.sidebarLinkItem:last-child {
+  margin-bottom: 0;
+}
+
+.sidebarLinkLabel {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sidebarLinkUrl {
+  display: block;
+  font-size: 0.72rem;
+  opacity: 0.88;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Additional information — heading over its details */
+.sidebarAddTitle {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sidebarAddDetails {
+  display: block;
+  font-size: 0.78rem;
+  opacity: 0.9;
+  line-height: 1.45;
+  margin-top: 0.1rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .sidebarMain {
