@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio Maker</title>
     <meta name="description" content="Create professional ATS friendly resumes and personal portfolios in minutes." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://portfolio-maker-six.vercel.app/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,7 +15,14 @@
     />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Static creator credit present in the initial HTML so the STRIVERS backlink
+           is crawlable even without JavaScript. React replaces this node on mount;
+           every app view then renders its own identical footer credit. -->
+      <footer style="padding:1.5rem;text-align:center;font-family:Inter,system-ui,sans-serif;font-size:.85rem;color:#6b7280;">
+        <p>Website designed &amp; developed by&nbsp;<a href="https://strivers.online" rel="noopener" style="color:#c084fc;font-weight:600;text-decoration:none;">Strivers</a></p>
+      </footer>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
