@@ -7,14 +7,13 @@ const About = () => {
         <h1 className={styles.headerTitle}>Welcome to My Portfolio</h1>
         <h2 className={styles.headerSubtitle}>Showcasing Skills, Team & Achievements</h2>
         <img src="/head.jpg" alt="Header Image" className={styles.headerImg} />
-        <img src="/logo.jpg" alt="Logo" className={styles.logo} />
       </header>
 
       <hr className={styles.divider} />
 
       <section className={styles.aboutText}>
         <p>
-          Welcome to the Portfolio Maker. Here you can explore our team, activities, achievements,
+          Welcome to QuickCv. Here you can explore our team, activities, achievements,
           and contact information to all designed in a structured and professional format
         </p>
       </section>

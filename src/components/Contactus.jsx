@@ -40,7 +40,6 @@ const ContactUs = () => {
         <h1 className={styles.headerTitle}>Contact Us</h1>
         <h2 className={styles.headerSubtitle}>We'd Love to Hear From You</h2>
         <img src="/head.jpg" alt="Header Image" className={styles.headerImg} />
-        <img src="/logo.jpg" alt="Logo" className={styles.logo} />
       </header>
 
       <hr className={styles.divider} />
@@ -94,10 +93,10 @@ const ContactUs = () => {
         <h2 className={styles.contactTitle}>Departments</h2>
         <ul className={styles.contactList}>
           <li>
-            <b>Support:</b> support@portfoliomaker.com
+            <b>Support:</b> support@quickcv.com
           </li>
           <li>
-            <b>Feedback:</b> feedback@portfoliomaker.com
+            <b>Feedback:</b> feedback@quickcv.com
           </li>
         </ul>
       </section>
@@ -106,13 +105,13 @@ const ContactUs = () => {
         <h2 className={styles.contactTitle}>Contact Others</h2>
         <ul className={styles.contactList}>
           <li>Phone: 03455343433546</li>
-          <li>Email: Portfolio@gmail.com</li>
+          <li>Email: QuickCv@gmail.com</li>
           <li>Address: 23-D Bahria Town, Lahore</li>
         </ul>
       </section>
 
       <footer className={styles.mainFooter}>
-        <p>© 2025 Portfolio Maker | All Rights Reserved</p>
+        <p>© 2025 QuickCv | All Rights Reserved</p>
         <p className="sv-credit">
           Website designed &amp; developed by{" "}
           <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">Strivers</a>

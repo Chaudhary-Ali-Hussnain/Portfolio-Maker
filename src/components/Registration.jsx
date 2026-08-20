@@ -183,7 +183,6 @@ const Registration = () => {
         <h1 className={styles.headerTitle}>Registration Form</h1>
         <h2 className={styles.headerSubtitle}>Build Your Complete Portfolio</h2>
         <img src="/head.jpg" alt="" className={styles.headersImg} />
-        <img src="/logo.jpg" alt="" className={styles.logo} />
       </header>
       <div className={styles.formContainer}>
         <hr className={styles.divider} />
