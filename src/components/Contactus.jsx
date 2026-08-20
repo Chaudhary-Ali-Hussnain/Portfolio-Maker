@@ -47,8 +47,6 @@ const ContactUs = () => {
       <section className={styles.formContainer}>
         <form className={styles.registrationForm} onSubmit={handleSubmit}>
           <fieldset className={styles.formSection}>
-            <legend>Contact Us</legend>
-
             <label className={styles.formLabel}>Name:</label>
             <input
               type="text"
