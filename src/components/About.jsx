@@ -4,7 +4,7 @@ const About = () => {
   return (
     <div>
       <header className={styles.mainHeader}>
-        <h1 className={styles.headerTitle}>Welcome to My Portfolio</h1>
+        <h1 className={styles.headerTitle}>Welcome to My QuickCv</h1>
         <h2 className={styles.headerSubtitle}>Showcasing Skills, Team & Achievements</h2>
         <img src="/head.jpg" alt="Header Image" className={styles.headerImg} />
       </header>

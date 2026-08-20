@@ -181,7 +181,7 @@ const Registration = () => {
     <div>
       <header className={styles.mainHeaders}>
         <h1 className={styles.headerTitle}>Registration Form</h1>
-        <h2 className={styles.headerSubtitle}>Build Your Complete Portfolio</h2>
+        <h2 className={styles.headerSubtitle}>Build Your Complete QuickCv</h2>
         <img src="/head.jpg" alt="" className={styles.headersImg} />
       </header>
       <div className={styles.formContainer}>
@@ -189,11 +189,11 @@ const Registration = () => {
         {error && <p className={styles.errorMsg}>&#9888; {error}</p>}
         <form className={styles.registrationForm} onSubmit={handleSubmit}>
           <fieldset className={styles.formSection}>
-            <legend>Portfolio Type</legend>
+            <legend>QuickCv Type</legend>
             <label className={styles.formLabel}>Choose style:</label>
             <div className={styles.radioGroup}>
               <input type="radio" id="ptStd" name="pt" value="standard" checked={portfolioType === "standard"} onChange={() => setType("standard")} />
-              <label htmlFor="ptStd">Standard Portfolio</label>
+              <label htmlFor="ptStd">Standard QuickCv</label>
               <input type="radio" id="ptAts" name="pt" value="ats" checked={portfolioType === "ats"} onChange={() => setType("ats")} />
               <label htmlFor="ptAts">ATS Friendly Resume</label>
             </div>
@@ -387,7 +387,7 @@ const Registration = () => {
 
           {portfolioType === "standard" && (
             <fieldset className={styles.formSection}>
-              <legend>Portfolio Colors</legend>
+              <legend>QuickCv Colors</legend>
               <label className={styles.formLabel} htmlFor="cPrimary">Primary:</label>
               <input type="color" id="cPrimary" className={styles.formInput} value={draft.colors.primary} onChange={(e) => setColors({ ...draft.colors, primary: e.target.value })} />
               <label className={styles.formLabel} htmlFor="cSecondary">Secondary:</label>
@@ -399,7 +399,7 @@ const Registration = () => {
             </fieldset>
           )}
 
-          <input type="submit" value={portfolioType === "ats" ? "Generate ATS Resume" : "Create Portfolio"} className={styles.formBtn} />
+          <input type="submit" value={portfolioType === "ats" ? "Generate ATS Resume" : "Create QuickCv"} className={styles.formBtn} />
           <button type="button" className={styles.formBtn} onClick={handleClear}>Clear Form</button>
         </form>
       </div>

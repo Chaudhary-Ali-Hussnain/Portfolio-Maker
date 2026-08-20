@@ -117,7 +117,7 @@ const Portfolio = () => {
       pdf.addImage(img, "PNG", 0, 0, pw, hPt);
       y += pageHpx;
     }
-    pdf.save("portfolio.pdf");
+    pdf.save("quickcv.pdf");
   };
 
   // ── Text-based ATS PDF export ──

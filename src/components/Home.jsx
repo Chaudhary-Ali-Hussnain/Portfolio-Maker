@@ -5,7 +5,7 @@ const Home = () => {
     <div className={styles.container}>
       <header className={styles.mainHeaders}>
         <h1>Welcome to QuickCv</h1>
-        <h2>Create Your Personal Portfolio Easily</h2>
+        <h2>Create Your Personal QuickCv Easily</h2>
         <img className={styles.headersImg} src="/head.jpg" alt="Header Image" />
       </header>
 
@@ -14,7 +14,7 @@ const Home = () => {
       <section className={styles.introCard}>
         <h3>Introduction</h3>
         <p>
-          <b>QuickCv</b> helps users create personal portfolios using simple forms.
+          <b>QuickCv</b> helps users create personal QuickCv using simple forms.
         </p>
         <p>
           It allows you to add your <i>information</i>, <u>skills</u>, and experiences.
@@ -32,7 +32,7 @@ const Home = () => {
       </section>
 
       <section className={styles.steps}>
-        <h3>Steps to Make Your Portfolio:</h3>
+        <h3>Steps to Make Your QuickCv:</h3>
         <ol className={styles.stepsList}>
           <li>Register using the form</li>
           <li>Upload your photo</li>
@@ -41,19 +41,15 @@ const Home = () => {
       </section>
 
       <section className={styles.imagesRow}>
-        <img src="/1.jpg" alt="Portfolio Example" />
-        <img src="/2.jpg" alt="Portfolio Sample" />
-        <img src="/3.jpg" alt="Portfolio Preview" />
+        <img src="/1.jpg" alt="QuickCv Example" />
+        <img src="/2.jpg" alt="QuickCv Sample" />
+        <img src="/3.jpg" alt="QuickCv Preview" />
       </section>
 
       <section className={styles.videoLink}>
-        <h3>Watch Video Tutorial:</h3>
-        <a
-          href="https://www.youtube.com/watch?v=-uQIBlaZ4P0&list=PL07efmqYWHZ_rVeQ1ws0ER9eL6cxo-d5V"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Watch this video on YouTube
+        <h3>QuickCv is made by Strivers</h3>
+        <a href="https://strivers.online" target="_blank" rel="noopener noreferrer">
+          Visit Strivers.online
         </a>
       </section>
 

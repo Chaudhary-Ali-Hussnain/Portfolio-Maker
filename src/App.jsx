@@ -47,7 +47,7 @@ function App() {
           <Route path="/registration" element={<Registration />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/about" element={<About />} />
-          <Route path="/portfolio" element={<Suspense fallback={<div className="route-loading">Loading portfolio…</div>}><Portfolio /></Suspense>} />
+          <Route path="/portfolio" element={<Suspense fallback={<div className="route-loading">Loading QuickCv…</div>}><Portfolio /></Suspense>} />
         </Routes>
       </Router>
     </PortfolioFormProvider>
